@@ -1,10 +1,11 @@
 class Persona:
 
-    def __init__(self):
+    def __init__(self, tipo):
         self.cedula = 0
         self.nombreCompleto = ""
         self.telefono = 0
         self.voto = 0
+        self.tipo = tipo
 
     def setCedula(self, cedula):
         self.cedula = cedula
@@ -35,7 +36,7 @@ class Estudiante(Persona):
     def __init__(self):
         self.carnet = ""
         self.carrera = ""
-        Persona.__init__(self)
+        Persona.__init__(self, tipo="estudiante")
 
     def setCarnet(self, carnet):
         self.carnet = carnet
@@ -54,7 +55,7 @@ class Profesor(Persona):
     def __init__(self):
         self.publicaciones = ""
         self.candidato = ""
-        Persona.__init__(self)
+        Persona.__init__(self, tipo="profesor")
 
     def setPublicaciones(self, publicaciones):
         self.publicaciones = publicaciones
@@ -73,7 +74,7 @@ class Administrativo(Persona):
     def __init__(self):
         self.puesto = ""
         self.extension = ""
-        Persona.__init__(self)
+        Persona.__init__(self, tipo="administrativo")
 
     def setPuesto(self, puesto):
         self.puesto = puesto
