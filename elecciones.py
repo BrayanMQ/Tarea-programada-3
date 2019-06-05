@@ -149,7 +149,7 @@ def pantallaGenerarVotacion():
 
 def pantallaReportes():
     pantallaGenerarVotacion = Toplevel(root)
-    pantallaGenerarVotacion.title("Generar votación")
+    pantallaGenerarVotacion.title("Reportes")
     pantallaGenerarVotacion.resizable(False, False)
 
     btn_ListaCandidatos = Button(pantallaGenerarVotacion, text="1. Lista de candidatos.", width=20, height=1)
