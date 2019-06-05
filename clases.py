@@ -31,6 +31,9 @@ class Persona:
     def getVoto(self):
         return self.voto
 
+    def getTipo(self):
+        return self.tipo
+
 class Estudiante(Persona):
 
     def __init__(self):
