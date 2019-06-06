@@ -8,7 +8,7 @@ def funcionBotonRegistrarCandidatos():
     return ""
 
 def funcionBotonGenerarVotacion():
-    return ""
+    return "Prueba"
 
 def funcionBotonReportes():
     return "hola"
