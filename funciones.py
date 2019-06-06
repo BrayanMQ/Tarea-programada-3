@@ -11,4 +11,4 @@ def funcionBotonGenerarVotacion():
     return ""
 
 def funcionBotonReportes():
-    return ""
+    return "hola"
