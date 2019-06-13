@@ -1,8 +1,55 @@
+from funciones import *
 from tkinter import *
 from tkinter import ttk
+import tkinter as tk
+from tkinter.messagebox import showinfo, showerror
+
+# Variables globales
+listaPersonas = []
+
+
+def deshabilitarMenuPrincipal():
+    btn_RegistrarMiembro.config(state="disabled")
+    btn_CargarDatos.config(state="disabled")
+    btn_RegistrarCandidatos.config(state="disabled")
+    btn_GenerarVotacion.config(state="disabled")
+    btn_Reportes.config(state="disabled")
+
+
+def habilitarMenuPrincipal():
+    btn_RegistrarMiembro.config(state="normal")
+    btn_CargarDatos.config(state="normal")
+    btn_RegistrarCandidatos.config(state="normal")
+    btn_GenerarVotacion.config(state="normal")
+    btn_Reportes.config(state="normal")
 
 
 def pantallaRegistrarMiembro():
+    def funcionBtnRegistrarPantallaRM():
+        mensaje = tk.messagebox.askquestion("Confirmación", "El miembro se registrará en el sistema. ¿Está de acuerdo?",
+                                            icon="warning")
+
+        if mensaje == 'yes':
+            persona = funcionRegitrarMiembro(txt_Cedula.get(),
+                                             txt_NombreCompleto.get(),
+                                             txt_Telefono.get(),
+                                             rb_variable.get(),
+                                             txt_Carnet.get(),
+                                             txtBox_Publicaciones.get(1.0, END),
+                                             txt_Extension.get(),
+                                             carrera=cb_Carrera.get(),
+                                             puesto=cb_Puesto.get(), )
+            listaPersonas.append(persona)
+
+    def funcionBtnLimpiarPantallaRM():
+        txt_Cedula.delete(0, len(txt_Cedula.get()))
+        txt_NombreCompleto.delete(0, len(txt_NombreCompleto.get()))
+        txt_Telefono.delete(0, len(txt_Telefono.get()))
+        rb_variable.set(0)
+        txt_Carnet.delete(0, len(txt_Carnet.get()))
+        txtBox_Publicaciones.delete(1.0, END)
+        txt_Extension.delete(0, len(txt_Extension.get()))
+
     pantallaRegistrarMiembro = Toplevel(root)
     pantallaRegistrarMiembro.title("Registrar miembro")
     pantallaRegistrarMiembro.geometry("400x600")
@@ -48,8 +95,9 @@ def pantallaRegistrarMiembro():
                                       "ATI-Administración de la Información",
                                       "E-Electrónica",
                                       "AE-Administración de Empresas",
-                                      "CA-Ingeniería en Computadoras"]).grid(row=8, column=1, padx=10, pady=5,
-                                                                             sticky="W")
+                                      "CA-Ingeniería en Computadoras"])
+    cb_Carrera.grid(row=8, column=1, padx=10, pady=5,
+                    sticky="W")
 
     # Tercera sección
     Label(pantallaRegistrarMiembro, text="Publicaciones: ").grid(row=9, column=0, padx=10, pady=5, sticky="E")
@@ -69,15 +117,26 @@ def pantallaRegistrarMiembro():
     # Cuarta sección
     Label(pantallaRegistrarMiembro, text="Puesto:").grid(row=11, column=0, padx=10, pady=5, sticky="E")
     cb_Puesto = ttk.Combobox(pantallaRegistrarMiembro, state="readonly",
-                             values=["Asistente administrativa",
+                             values=["Secretaria",
+                                     "Asistente administrativa",
                                      "Coordinador",
-                                     "Director"]).grid(row=11, column=1, padx=10, pady=5, sticky="W")
+                                     "Director"])
+    cb_Puesto.grid(row=11, column=1, padx=10, pady=5, sticky="W")
 
     Label(pantallaRegistrarMiembro, text="Extensión:").grid(row=12, column=0, padx=10, pady=5, sticky="E")
     txt_Extension = Entry(pantallaRegistrarMiembro)
     txt_Extension.grid(row=12, column=1, padx=10, pady=5, sticky="W")
 
     lbl_Errores = Label(pantallaRegistrarMiembro, text="Errores xd", fg="red").grid(row=13, column=0, padx=10, pady=5)
+
+    # Quinta sección
+    btn_LimpiarRM = Button(pantallaRegistrarMiembro, text="Registrar", command=funcionBtnRegistrarPantallaRM)
+    btn_LimpiarRM.grid(row=14, column=0, padx=0, pady=0)
+    btn_LimpiarRM.config(font="Helvetica")
+
+    btn_LimpiarRM = Button(pantallaRegistrarMiembro, text="Limpiar", command=funcionBtnLimpiarPantallaRM)
+    btn_LimpiarRM.grid(row=14, column=1, padx=0, pady=0)
+    btn_LimpiarRM.config(font="Helvetica")
 
 
 def pantallaCargarDatos():
@@ -147,6 +206,7 @@ def pantallaGenerarVotacion():
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
     btn_Regresar.config(font="Helvetica")
 
+
 def pantallaReportes():
     pantallaGenerarVotacion = Toplevel(root)
     pantallaGenerarVotacion.title("Reportes")
@@ -189,6 +249,7 @@ def pantallaReportes():
     btn_CargaAutomatica = Button(pantallaGenerarVotacion, text="9. Carga automática.", width=20, height=1)
     btn_CargaAutomatica.grid(row=8, column=1, padx=50, pady=5)
     btn_CargaAutomatica.config(font="Helvetica", fg="#0E9F00")
+
 
 # Definición de la ventana principal
 root = Tk()

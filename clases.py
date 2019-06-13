@@ -34,6 +34,7 @@ class Persona:
     def getTipo(self):
         return self.tipo
 
+
 class Estudiante(Persona):
 
     def __init__(self):
@@ -53,6 +54,7 @@ class Estudiante(Persona):
     def getCarrera(self):
         return self.carrera
 
+
 class Profesor(Persona):
 
     def __init__(self):
@@ -71,6 +73,7 @@ class Profesor(Persona):
 
     def getCandidato(self):
         return self.candidato
+
 
 class Administrativo(Persona):
 
