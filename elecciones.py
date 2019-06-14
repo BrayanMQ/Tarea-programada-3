@@ -1,8 +1,34 @@
 from funciones import *
+from tkinter import *
+from tkinter import ttk
+import tkinter as tk
+import pickle
+from tkinter.messagebox import showinfo, showerror
 
 # Variables globales
 listaPersonas = []
+nomArch = "personas_backUp"
 
+def grabar(nomArchGrabar, lista):
+    #Función que graba un archivo con una lista de personas
+    try:
+        f = open(nomArchGrabar, "wb")
+        pickle.dump(lista, f)
+        f.close()
+    except:
+        showerror("Error", "No se encontró backUp.")
+
+def leer(nomArchLeer):
+    #Función que lee un archivo con una lista de personas
+    lista = []
+    try:
+        f = open(nomArchLeer, "rb")
+        lista = pickle.load(f)
+        f.close()
+        showinfo("Back up", "Se cargó con éxito el back up.")
+    except:
+        showerror("Error", "Error al cargar el back up")
+    return lista
 
 def deshabilitarMenuPrincipal():
     btn_RegistrarMiembro.config(state="disabled")
@@ -126,6 +152,7 @@ def pantallaRegistrarMiembro():
                                              carrera=cb_Carrera.get(),
                                              puesto=cb_Puesto.get(), )
             listaPersonas.append(persona)
+            grabar(nomArch, listaPersonas) #Graba el archivo en memoria secundaria
 
     def funcionBtnLimpiarPantallaRM():
         txt_Cedula.delete(0, len(txt_Cedula.get()))
@@ -378,5 +405,7 @@ btn_GenerarVotacion.config(font="Helvetica", fg="#0E9F00")
 btn_Reportes = Button(frame, text="Reportes", command=pantallaReportes, width=20, height=1)
 btn_Reportes.grid(row=4, column=1, padx=50, pady=5)
 btn_Reportes.config(font="Helvetica", fg="#0E9F00")
+
+leer(nomArch) #Leer el backUp
 
 root.mainloop()
