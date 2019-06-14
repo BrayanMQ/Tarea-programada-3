@@ -1,8 +1,4 @@
 from funciones import *
-from tkinter import *
-from tkinter import ttk
-import tkinter as tk
-from tkinter.messagebox import showinfo, showerror
 
 # Variables globales
 listaPersonas = []
@@ -25,16 +21,106 @@ def habilitarMenuPrincipal():
 
 
 def pantallaRegistrarMiembro():
+    def ver():
+        if rb_variable.get() == 1:
+            txtBox_Publicaciones.config(state="disabled")
+            cb_Puesto.config(state="disabled")
+            txt_Extension.config(state="disabled")
+            txt_Carnet.config(state="normal")
+            cb_Carrera.config(state="normal")
+        elif rb_variable.get() == 2:
+            txt_Carnet.config(state="disabled")
+            cb_Carrera.config(state="disabled")
+            cb_Puesto.config(state="disabled")
+            txt_Extension.config(state="disabled")
+            txtBox_Publicaciones.config(state="normal")
+        elif rb_variable.get() == 3:
+            txt_Carnet.config(state="disabled")
+            cb_Carrera.config(state="disabled")
+            txtBox_Publicaciones.config(state="disabled")
+            cb_Puesto.config(state="normal")
+            txt_Extension.config(state="normal")
+
+    # def validar
+
+    def validarDatos():
+
+        if rb_variable.get() == 1:
+            validacionCarnet = validarCarnet(txt_Carnet.get())
+            if validacionCarnet[0]:
+                mensajeError.set(validacionCarnet[1])
+                return ""
+
+            validacionLenCarnet = validarLargoCarnet(txt_Carnet.get())
+            if validacionLenCarnet[0]:
+                mensajeError.set(validacionLenCarnet[1])
+                return ""
+
+        if rb_variable == 2:
+            if txtBox_Publicaciones == "":
+                mensajeError.set("De ingresar como mínimo una publicación.")
+                return ""
+
+        if rb_variable == 3:
+            validacionLenExtension = validarLargoExtension(txt_Extension.get())
+            if validacionLenExtension[0]:
+                mensajeError.set(validacionLenExtension[1])
+                return ""
+
+            validacionExtension = validarExtension(txt_Extension.get())
+            if validacionExtension[0]:
+                mensajeError.set(validacionExtension[1])
+                return ""
+
+            if cb_Puesto == "":
+                mensajeError.set("Debe seleccionar un puesto.")
+                return ""
+
+        validacionLenCedula = validarLargoCedula(txt_Cedula.get())
+        if validacionLenCedula[0]:
+            mensajeError.set(validacionLenCedula[1])
+            return ""
+
+        validacionCedula = validarCedula(txt_Cedula.get())
+        if validacionCedula[0]:
+            mensajeError.set(validacionCedula[1])
+            return ""
+
+        validacionCedulaExist = validacionCedulaExistente(int(txt_Cedula.get()), listaPersonas)
+        if validacionCedulaExist[0]:
+            mensajeError.set(validacionCedulaExist[1])
+            return ""
+
+        validacionLenTelefono = validarLargoTelefono(txt_Telefono.get())
+        if validacionLenTelefono[0]:
+            mensajeError.set(validacionLenTelefono[1])
+            return ""
+
+        validacionTelefono = validarTelefono(txt_Telefono.get())
+        if validacionTelefono[0]:
+            mensajeError.set(validacionTelefono[1])
+            return ""
+
+        camposVacios = validarCamposVacios(txt_NombreCompleto.get(),
+                                           txt_Extension.get(),
+                                           carrera=cb_Carrera.get())
+        if camposVacios:
+            mensajeError.set("Debe ingresar toda la información requerida.")
+            return ""
+        mensajeError.set("")
+        return funcionBtnRegistrarPantallaRM()
+
     def funcionBtnRegistrarPantallaRM():
+
         mensaje = tk.messagebox.askquestion("Confirmación", "El miembro se registrará en el sistema. ¿Está de acuerdo?",
                                             icon="warning")
 
         if mensaje == 'yes':
-            persona = funcionRegitrarMiembro(txt_Cedula.get(),
+            persona = funcionRegitrarMiembro(int(txt_Cedula.get()),
                                              txt_NombreCompleto.get(),
-                                             txt_Telefono.get(),
+                                             int(txt_Telefono.get()),
                                              rb_variable.get(),
-                                             txt_Carnet.get(),
+                                             int(txt_Carnet.get()),
                                              txtBox_Publicaciones.get(1.0, END),
                                              txt_Extension.get(),
                                              carrera=cb_Carrera.get(),
@@ -70,17 +156,21 @@ def pantallaRegistrarMiembro():
     txt_Telefono.grid(row=2, column=1, padx=10, pady=5, sticky="W")
 
     rb_variable = IntVar()
+    rb_variable.set(1)
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1).grid(row=3, column=0, padx=10, pady=5,
-                                                                              sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1, command=ver).grid(row=3, column=0, padx=10,
+                                                                                           pady=5,
+                                                                                           sticky="W")
     Label(pantallaRegistrarMiembro, text="Estudiante").grid(row=3, column=0, padx=10, pady=5, sticky="E")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2).grid(row=4, column=0, padx=10, pady=5,
-                                                                              sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2, command=ver).grid(row=4, column=0, padx=10,
+                                                                                           pady=5,
+                                                                                           sticky="W")
     Label(pantallaRegistrarMiembro, text="Profesor").grid(row=4, column=0, padx=10, pady=5, sticky="E")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3).grid(row=5, column=0, padx=10, pady=5,
-                                                                              sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3, command=ver).grid(row=5, column=0, padx=10,
+                                                                                           pady=5,
+                                                                                           sticky="W")
     Label(pantallaRegistrarMiembro, text="Administrativo").grid(row=5, column=0, padx=10, pady=5, sticky="E")
 
     # Segunda sección
@@ -127,16 +217,22 @@ def pantallaRegistrarMiembro():
     txt_Extension = Entry(pantallaRegistrarMiembro)
     txt_Extension.grid(row=12, column=1, padx=10, pady=5, sticky="W")
 
-    lbl_Errores = Label(pantallaRegistrarMiembro, text="Errores xd", fg="red").grid(row=13, column=0, padx=10, pady=5)
+    mensajeError = StringVar()
+    mensajeError.set("")
+    lbl_Errores = Label(pantallaRegistrarMiembro, textvariable=mensajeError, fg="red")
+    lbl_Errores.grid(row=13, column=1, padx=10, pady=5)
 
     # Quinta sección
-    btn_LimpiarRM = Button(pantallaRegistrarMiembro, text="Registrar", command=funcionBtnRegistrarPantallaRM)
-    btn_LimpiarRM.grid(row=14, column=0, padx=0, pady=0)
-    btn_LimpiarRM.config(font="Helvetica")
+    btn_RegistrarRM = Button(pantallaRegistrarMiembro, text="Registrar", command=validarDatos)
+    btn_RegistrarRM.grid(row=14, column=0, padx=0, pady=0)
+    btn_RegistrarRM.config(font="Helvetica")
 
     btn_LimpiarRM = Button(pantallaRegistrarMiembro, text="Limpiar", command=funcionBtnLimpiarPantallaRM)
     btn_LimpiarRM.grid(row=14, column=1, padx=0, pady=0)
     btn_LimpiarRM.config(font="Helvetica")
+
+    # Este método es para habilitar un valor por defecto en los radio botones
+    ver()
 
 
 def pantallaCargarDatos():
