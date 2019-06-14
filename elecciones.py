@@ -70,7 +70,7 @@ def pantallaRegistrarMiembro():
     # def validar
 
     def validarDatos():
-
+        listaPersonas = leer(nomArch)
         if rb_variable.get() == 1:
             validacionCarnet = validarCarnet(txt_Carnet.get())
             if validacionCarnet[0]:
@@ -263,6 +263,31 @@ def pantallaRegistrarMiembro():
 
 
 def pantallaCargarDatos():
+    def funcionBtnCargarDatosConfirmacion():
+        mensaje = tk.messagebox.askquestion("Confirmación", "Se cargarán los datos aleatorios. ¿Desea continuar?",
+                                            icon="warning")
+        if mensaje == 'yes':
+            cargaListaPersonas = leer(nomArch)
+            nuevaCarga = funcionCargarDatos(txt_Cantidad.get(), cargaListaPersonas)
+            grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
+
+    def funcionBtnLimpiarPantallaCargarDatos():
+        txt_Cantidad.delete(0, len(txt_Cantidad.get()))
+
+    def validarCarga():
+        validacionTipoDato = validarTipoDatoCarga(txt_Cantidad.get())
+        if validacionTipoDato[0]:
+            mensajeError.set(validacionTipoDato[1])
+            return ""
+
+        validacionCantidadCarga = validarCantidadCarga(txt_Cantidad.get())
+        if validacionCantidadCarga[0]:
+            mensajeError.set(validacionCantidadCarga[1])
+            return ""
+
+        mensajeError.set("")
+        return funcionBtnCargarDatosConfirmacion()
+
     pantallaCargarDatos = Toplevel(root)
     pantallaCargarDatos.title("Cargar datos")
     pantallaCargarDatos.geometry("350x170")
@@ -274,15 +299,17 @@ def pantallaCargarDatos():
     txt_Cantidad = Entry(pantallaCargarDatos)
     txt_Cantidad.grid(row=1, column=1, padx=10, pady=5, sticky="W")
 
-    btn_Crear = Button(pantallaCargarDatos, text="Cargar")
+    btn_Crear = Button(pantallaCargarDatos, text="Cargar", command=validarCarga)
     btn_Crear.grid(row=2, column=0, padx=5, pady=5)
     btn_Crear.config(font="Helvetica")
 
-    btn_Limpiar = Button(pantallaCargarDatos, text="Limpiar")
+    btn_Limpiar = Button(pantallaCargarDatos, text="Limpiar", command=funcionBtnLimpiarPantallaCargarDatos)
     btn_Limpiar.grid(row=2, column=1, padx=5, pady=5)
     btn_Limpiar.config(font="Helvetica")
 
-    lbl_Errores = Label(pantallaCargarDatos, text="Error :v", fg="red")
+    mensajeError = StringVar()
+    mensajeError.set("")
+    lbl_Errores = Label(pantallaCargarDatos, textvariable=mensajeError, fg="red")
     lbl_Errores.place(x=125, y=125)
 
 
