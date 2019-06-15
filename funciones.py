@@ -1,4 +1,4 @@
-from clases import *
+from funcionesHTML import *
 import random
 
 
@@ -117,6 +117,7 @@ def crearPersona(persona, cedula, nombre, telefono):
     persona.setTelefono(telefono)
     return persona
 
+
 def funcionRegitrarMiembro(cedula, nombre, telefono, tipo,
                            carnet, publicaciones, extension, carrera, puesto):
     if tipo == 1:
@@ -137,6 +138,7 @@ def obtenerCedula(listaPersonas):
         while validacionCedulaExistente(cedula, listaPersonas)[0]:
             cedula = random.randint(100000000, 799999999)
     return cedula
+
 
 def obtenerContador(listaPersonasCarga):
     if listaPersonasCarga == []:
@@ -190,31 +192,35 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
             extension = random.randint(1000, 9999)
 
         persona = funcionRegitrarMiembro(cedula, nombreCompleto, telefono, tipoPersona,
-                                     carnet, publicacion, extension, carrera, puesto)
+                                         carnet, publicacion, extension, carrera, puesto)
         listaPersonasCarga += [persona]
-    for persona in listaPersonasCarga:
-        print(persona.getNombreCompleto())
     return listaPersonasCarga
+
 
 def funcionCantidadCandidatos(listaPersonas):
     cantidad = 0
+    listaPosiciones = []
     for persona in listaPersonas:
         if persona.getTipo() == "profesor":
             if not persona.getCandidato() == "":
                 cantidad += 1
+                listaPosiciones.append(persona)
+    print("")
+    return cantidad, listaPosiciones
 
-    if cantidad == 0:
-        cantidad += 1
-
-    return cantidad
 
 def funcionGenerarVotacion(anno, listaPersonas):
     cntCandidatos = funcionCantidadCandidatos(listaPersonas)
 
     for persona in listaPersonas:
-        voto = random.randint(1, cntCandidatos)
+        voto = random.randint(1, cntCandidatos[0])
         persona.setVoto(voto)
     return listaPersonas
+
+
+def funcionHTMLListaCandidatos(listaPersonas):
+    candidatos = funcionCantidadCandidatos(listaPersonas)
+    return crearReporteListaCandidatos(candidatos[1])
 
 
 def funcionBotonReportes():

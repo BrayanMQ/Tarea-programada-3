@@ -360,7 +360,7 @@ def pantallaRegistrarCandidato():
                                 contador = funcionCantidadCandidatos(listaPersonas)
 
                                 annoActual = str(time.strftime("%Y"))
-                                consecutivo = annoActual + "-" + str(contador)
+                                consecutivo = annoActual + "-" + str(contador[0])
                                 persona.setCandidato(consecutivo)
                                 grabar(nomArch, listaPersonas)
                         else:
@@ -408,8 +408,6 @@ def pantallaGenerarVotacion():
             nuevaCarga = funcionGenerarVotacion(cb_Anno.get(), listaPersonas)
             grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
             actualizarLista()
-            for persona in listaPersonas:
-                print(persona.getVoto(), persona.getCedula())
         else:
             tk.messagebox.showinfo("Confirmación", "Debe seleccionar un año.")
 
@@ -437,45 +435,48 @@ def pantallaGenerarVotacion():
 
 
 def pantallaReportes():
-    pantallaGenerarVotacion = Toplevel(root)
-    pantallaGenerarVotacion.title("Reportes")
-    pantallaGenerarVotacion.resizable(False, False)
+    pantallaReportes = Toplevel(root)
+    pantallaReportes.title("Reportes")
+    pantallaReportes.resizable(False, False)
 
-    btn_ListaCandidatos = Button(pantallaGenerarVotacion, text="1. Lista de candidatos.", width=20, height=1)
+    def llamarFuncionHTMLListaCandidatos():
+        return funcionHTMLListaCandidatos(listaPersonas)
+
+    btn_ListaCandidatos = Button(pantallaReportes, command=llamarFuncionHTMLListaCandidatos, text="1. Lista de candidatos.", width=20, height=1)
     btn_ListaCandidatos.grid(row=0, column=1, padx=50, pady=5)
     btn_ListaCandidatos.config(font="Helvetica", fg="#0E9F00")
 
-    btn_CantidadVotantesPorCandidato = Button(pantallaGenerarVotacion, text="2. Cantidad de votantes por candidato.",
+    btn_CantidadVotantesPorCandidato = Button(pantallaReportes, text="2. Cantidad de votantes por candidato.",
                                               width=30, height=1)
     btn_CantidadVotantesPorCandidato.grid(row=1, column=1, padx=50, pady=5)
     btn_CantidadVotantesPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_SeguidoresPorCandidato = Button(pantallaGenerarVotacion, text="3. Seguidores por candidato.", width=23,
+    btn_SeguidoresPorCandidato = Button(pantallaReportes, text="3. Seguidores por candidato.", width=23,
                                         height=1)
     btn_SeguidoresPorCandidato.grid(row=2, column=1, padx=50, pady=5)
     btn_SeguidoresPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_VotantesPorRol = Button(pantallaGenerarVotacion, text="4. Votantes por rol.", width=20, height=1)
+    btn_VotantesPorRol = Button(pantallaReportes, text="4. Votantes por rol.", width=20, height=1)
     btn_VotantesPorRol.grid(row=3, column=1, padx=50, pady=5)
     btn_VotantesPorRol.config(font="Helvetica", fg="#0E9F00")
 
-    btn_ListaNoVotantes = Button(pantallaGenerarVotacion, text="5. Lista de no votantes.", width=20, height=1)
+    btn_ListaNoVotantes = Button(pantallaReportes, text="5. Lista de no votantes.", width=20, height=1)
     btn_ListaNoVotantes.grid(row=4, column=1, padx=50, pady=5)
     btn_ListaNoVotantes.config(font="Helvetica", fg="#0E9F00")
 
-    btn_EstudiantesPorCarrera = Button(pantallaGenerarVotacion, text="6. Estudiantes por carrera.", width=21, height=1)
+    btn_EstudiantesPorCarrera = Button(pantallaReportes, text="6. Estudiantes por carrera.", width=21, height=1)
     btn_EstudiantesPorCarrera.grid(row=5, column=1, padx=50, pady=5)
     btn_EstudiantesPorCarrera.config(font="Helvetica", fg="#0E9F00")
 
-    btn_PadronPorRol = Button(pantallaGenerarVotacion, text="7. Padrón por rol.", width=20, height=1)
+    btn_PadronPorRol = Button(pantallaReportes, text="7. Padrón por rol.", width=20, height=1)
     btn_PadronPorRol.grid(row=6, column=1, padx=50, pady=5)
     btn_PadronPorRol.config(font="Helvetica", fg="#0E9F00")
 
-    btn_VotantesDeCandidato = Button(pantallaGenerarVotacion, text="8. Votantes de candidato.", width=21, height=1)
+    btn_VotantesDeCandidato = Button(pantallaReportes, text="8. Votantes de candidato.", width=21, height=1)
     btn_VotantesDeCandidato.grid(row=7, column=1, padx=50, pady=5)
     btn_VotantesDeCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_CargaAutomatica = Button(pantallaGenerarVotacion, text="9. Carga automática.", width=20, height=1)
+    btn_CargaAutomatica = Button(pantallaReportes, text="9. Carga automática.", width=20, height=1)
     btn_CargaAutomatica.grid(row=8, column=1, padx=50, pady=5)
     btn_CargaAutomatica.config(font="Helvetica", fg="#0E9F00")
 
