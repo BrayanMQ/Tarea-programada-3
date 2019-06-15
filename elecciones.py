@@ -10,6 +10,9 @@ from tkinter.messagebox import showinfo, showerror
 listaPersonas = []
 nomArch = "personas_backUp"
 
+def actualizarLista():
+    listaPersonas = leer(nomArch)
+    return ""
 
 def grabar(nomArchGrabar, lista):
     # Función que graba un archivo con una lista de personas
@@ -158,14 +161,25 @@ def pantallaRegistrarMiembro():
             listaPersonas.append(persona)
             grabar(nomArch, listaPersonas)  # Graba el archivo en memoria secundaria
 
+    def habilitarRegistrarMiembro():
+        txt_Carnet.config(state="normal")
+        cb_Carrera.config(state="normal")
+        txtBox_Publicaciones.config(state="normal")
+        cb_Puesto.config(state="normal")
+        txt_Extension.config(state="normal")
+
     def funcionBtnLimpiarPantallaRM():
+        habilitarRegistrarMiembro()
         txt_Cedula.delete(0, len(txt_Cedula.get()))
         txt_NombreCompleto.delete(0, len(txt_NombreCompleto.get()))
         txt_Telefono.delete(0, len(txt_Telefono.get()))
-        rb_variable.set(0)
+        rb_variable.set(1)
         txt_Carnet.delete(0, len(txt_Carnet.get()))
+        cb_Carrera.set("")
         txtBox_Publicaciones.delete(1.0, END)
+        cb_Puesto.set("")
         txt_Extension.delete(0, len(txt_Extension.get()))
+        ver()
 
     pantallaRegistrarMiembro = Toplevel(root)
     pantallaRegistrarMiembro.title("Registrar miembro")
@@ -271,9 +285,9 @@ def pantallaCargarDatos():
         mensaje = tk.messagebox.askquestion("Confirmación", "Se cargarán los datos aleatorios. ¿Desea continuar?",
                                             icon="warning")
         if mensaje == 'yes':
-            cargaListaPersonas = leer(nomArch)
-            nuevaCarga = funcionCargarDatos(txt_Cantidad.get(), cargaListaPersonas)
+            nuevaCarga = funcionCargarDatos(txt_Cantidad.get(), listaPersonas)
             grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
+            actualizarLista()
 
     def funcionBtnLimpiarPantallaCargarDatos():
         txt_Cantidad.delete(0, len(txt_Cantidad.get()))
@@ -354,9 +368,9 @@ def pantallaRegistrarCandidato():
                         else:
                             lbl_Errores.config(text="El candidato ya se encuentra registrado.")
 
-                        if not encontrado:
-                            lbl_Errores.config(
-                                text="La cédula solicitada no corresponde a \nningún docente registrado.")
+                    if not encontrado:
+                        lbl_Errores.config(
+                            text="La cédula solicitada no corresponde a \nningún docente registrado.")
             else:
                 mensaje = validarLargoCedula(cedula)[1]
                 lbl_Errores.config(text=mensaje)
@@ -390,6 +404,18 @@ def pantallaRegistrarCandidato():
 
 
 def pantallaGenerarVotacion():
+
+    def funcionBtnElegir():
+        if not cb_Anno.get() == "":
+            nuevaCarga = funcionGenerarVotacion(cb_Anno.get(), listaPersonas)
+            grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
+            actualizarLista()
+            for persona in listaPersonas:
+                print(persona.getVoto(), persona.getCedula())
+        else:
+            tk.messagebox.showinfo("Confirmación", "Debe seleccionar un año.")
+
+
     pantallaGenerarVotacion = Toplevel(root)
     pantallaGenerarVotacion.title("Generar votación")
     pantallaGenerarVotacion.geometry("275x85")
@@ -400,13 +426,14 @@ def pantallaGenerarVotacion():
                            values=["2019",
                                    "2023",
                                    "2027",
-                                   "2031"]).grid(row=1, column=1, padx=10, pady=5, sticky="W")
+                                   "2031"])
+    cb_Anno.grid(row=1, column=1, padx=10, pady=5, sticky="W")
 
-    btn_Elegir = Button(pantallaGenerarVotacion, text="Elegir")
+    btn_Elegir = Button(pantallaGenerarVotacion, command=funcionBtnElegir, text="Elegir")
     btn_Elegir.grid(row=2, column=0, padx=5, pady=5)
     btn_Elegir.config(font="Helvetica")
 
-    btn_Regresar = Button(pantallaGenerarVotacion, text="Regresar")
+    btn_Regresar = Button(pantallaGenerarVotacion, command="", text="Regresar")
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
     btn_Regresar.config(font="Helvetica")
 

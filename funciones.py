@@ -1,11 +1,6 @@
 from clases import *
 import random
 
-from tkinter import *
-from tkinter import ttk
-import tkinter as tk
-from tkinter.messagebox import showinfo, showerror
-
 
 def validarCamposVacios(nombre, tipo, carrera):
     if nombre == "" == "":
@@ -197,10 +192,25 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
         persona = funcionRegitrarMiembro(cedula, nombreCompleto, telefono, tipoPersona,
                                      carnet, publicacion, extension, carrera, puesto)
         listaPersonasCarga += [persona]
+    for persona in listaPersonasCarga:
+        print(persona.getNombreCompleto())
     return listaPersonasCarga
 
-def funcionBotonGenerarVotacion():
-    return ""
+def funcionCantidadCandidatos(listaPersonas):
+    cantidad = 0
+    for persona in listaPersonas:
+        if persona.getTipo() == "profesor":
+            if not persona.getCandidato() == "":
+                cantidad += 1
+    return cantidad
+
+def funcionGenerarVotacion(anno, listaPersonas):
+    cntCandidatos = funcionCantidadCandidatos(listaPersonas)
+
+    for persona in listaPersonas:
+        voto = random.randint(1, cntCandidatos)
+        persona.setVoto(voto)
+    return listaPersonas
 
 
 def funcionBotonReportes():
