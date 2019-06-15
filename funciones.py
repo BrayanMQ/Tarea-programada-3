@@ -202,6 +202,10 @@ def funcionCantidadCandidatos(listaPersonas):
         if persona.getTipo() == "profesor":
             if not persona.getCandidato() == "":
                 cantidad += 1
+
+    if cantidad == 0:
+        cantidad += 1
+
     return cantidad
 
 def funcionGenerarVotacion(anno, listaPersonas):

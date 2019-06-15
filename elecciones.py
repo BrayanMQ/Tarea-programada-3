@@ -21,7 +21,7 @@ def grabar(nomArchGrabar, lista):
         pickle.dump(lista, f)
         f.close()
     except:
-        showerror("Error", "No se encontró backUp.")
+        print("Error")
 
 
 def leer(nomArchLeer):
@@ -32,8 +32,10 @@ def leer(nomArchLeer):
         lista = pickle.load(f)
         f.close()
         showinfo("Back up", "Se cargó con éxito el back up.")
+
     except:
-        showerror("Error", "Error al cargar el back up")
+        print("Error")
+
     return lista
 
 
@@ -349,17 +351,13 @@ def pantallaRegistrarCandidato():
                         if persona.getCandidato() == "":
 
                             respuesta = tk.messagebox.askquestion("Confirmación", "El docente con cédula " + cedula +
-                                                                  " se registrará como candidato. ¿Está de acuerdo?", icon="info")
+                                                                  " se registrará como candidato. ¿Está de acuerdo?",
+                                                                  icon="info")
 
                             if respuesta == "yes":
 
                                 #Meter este for en una función
-                                contador = 1
-                                for candidato in listaPersonas:
-                                    if candidato.getTipo() == "profesor":
-                                        candidatoInfo = candidato.getCandidato()
-                                        if not candidatoInfo == "":
-                                            contador += 1
+                                contador = funcionCantidadCandidatos(listaPersonas)
 
                                 annoActual = str(time.strftime("%Y"))
                                 consecutivo = annoActual + "-" + str(contador)
