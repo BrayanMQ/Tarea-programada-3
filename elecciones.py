@@ -3,14 +3,16 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 import pickle
+import time
 from tkinter.messagebox import showinfo, showerror
 
 # Variables globales
 listaPersonas = []
 nomArch = "personas_backUp"
 
+
 def grabar(nomArchGrabar, lista):
-    #Función que graba un archivo con una lista de personas
+    # Función que graba un archivo con una lista de personas
     try:
         f = open(nomArchGrabar, "wb")
         pickle.dump(lista, f)
@@ -18,8 +20,9 @@ def grabar(nomArchGrabar, lista):
     except:
         showerror("Error", "No se encontró backUp.")
 
+
 def leer(nomArchLeer):
-    #Función que lee un archivo con una lista de personas
+    # Función que lee un archivo con una lista de personas
     lista = []
     try:
         f = open(nomArchLeer, "rb")
@@ -29,6 +32,7 @@ def leer(nomArchLeer):
     except:
         showerror("Error", "Error al cargar el back up")
     return lista
+
 
 def deshabilitarMenuPrincipal():
     btn_RegistrarMiembro.config(state="disabled")
@@ -139,20 +143,20 @@ def pantallaRegistrarMiembro():
     def funcionBtnRegistrarPantallaRM():
 
         mensaje = tk.messagebox.askquestion("Confirmación", "El miembro se registrará en el sistema. ¿Está de acuerdo?",
-                                            icon="warning")
+                                            icon="info")
 
         if mensaje == 'yes':
             persona = funcionRegitrarMiembro(int(txt_Cedula.get()),
                                              txt_NombreCompleto.get(),
                                              int(txt_Telefono.get()),
                                              rb_variable.get(),
-                                             int(txt_Carnet.get()),
+                                             txt_Carnet.get(),
                                              txtBox_Publicaciones.get(1.0, END),
                                              txt_Extension.get(),
                                              carrera=cb_Carrera.get(),
                                              puesto=cb_Puesto.get(), )
             listaPersonas.append(persona)
-            grabar(nomArch, listaPersonas) #Graba el archivo en memoria secundaria
+            grabar(nomArch, listaPersonas)  # Graba el archivo en memoria secundaria
 
     def funcionBtnLimpiarPantallaRM():
         txt_Cedula.delete(0, len(txt_Cedula.get()))
@@ -314,6 +318,56 @@ def pantallaCargarDatos():
 
 
 def pantallaRegistrarCandidato():
+    def funcionBotonRegistrarCandidatos():
+
+        cedula = txt_Cedula.get()
+
+        if not validarCedula(cedula)[0]:
+            if not validarLargoCedula(cedula)[0]:
+                encontrado = False
+                for persona in listaPersonas:
+
+                    tipo = persona.getTipo()
+                    cedulaPersona = persona.getCedula()
+
+                    if tipo == "profesor" and cedula == str(cedulaPersona):
+                        encontrado = True
+                        if persona.getCandidato() == "":
+
+                            respuesta = tk.messagebox.askquestion("Confirmación", "El docente con cédula " + cedula +
+                                                                  " se registrará como candidato. ¿Está de acuerdo?", icon="info")
+
+                            if respuesta == "yes":
+
+                                #Meter este for en una función
+                                contador = 1
+                                for candidato in listaPersonas:
+                                    if candidato.getTipo() == "profesor":
+                                        candidatoInfo = candidato.getCandidato()
+                                        if not candidatoInfo == "":
+                                            contador += 1
+
+                                annoActual = str(time.strftime("%Y"))
+                                consecutivo = annoActual + "-" + str(contador)
+                                persona.setCandidato(consecutivo)
+                                grabar(nomArch, listaPersonas)
+                        else:
+                            lbl_Errores.config(text="El candidato ya se encuentra registrado.")
+
+                        if not encontrado:
+                            lbl_Errores.config(
+                                text="La cédula solicitada no corresponde a \nningún docente registrado.")
+            else:
+                mensaje = validarLargoCedula(cedula)[1]
+                lbl_Errores.config(text=mensaje)
+        else:
+            mensaje = validarCedula(cedula)[1]
+            lbl_Errores.config(text=mensaje)
+
+    def funcionBotonLimpiar():
+        txt_Cedula.delete(0, len(txt_Cedula.get()))
+        lbl_Errores.config(text="")
+
     pantallaRegistrarCandidato = Toplevel(root)
     pantallaRegistrarCandidato.title("Registrar candidato")
     pantallaRegistrarCandidato.geometry("350x170")
@@ -323,11 +377,11 @@ def pantallaRegistrarCandidato():
     txt_Cedula = Entry(pantallaRegistrarCandidato)
     txt_Cedula.grid(row=1, column=1, padx=10, pady=5, sticky="W")
 
-    btn_Crear = Button(pantallaRegistrarCandidato, text="Buscar")
-    btn_Crear.grid(row=2, column=0, padx=5, pady=5)
-    btn_Crear.config(font="Helvetica")
+    btn_Buscar = Button(pantallaRegistrarCandidato, command=funcionBotonRegistrarCandidatos, text="Buscar")
+    btn_Buscar.grid(row=2, column=0, padx=5, pady=5)
+    btn_Buscar.config(font="Helvetica")
 
-    btn_Limpiar = Button(pantallaRegistrarCandidato, text="Limpiar")
+    btn_Limpiar = Button(pantallaRegistrarCandidato, command=funcionBotonLimpiar, text="Limpiar")
     btn_Limpiar.grid(row=2, column=1, padx=5, pady=5)
     btn_Limpiar.config(font="Helvetica")
 
@@ -433,6 +487,6 @@ btn_Reportes = Button(frame, text="Reportes", command=pantallaReportes, width=20
 btn_Reportes.grid(row=4, column=1, padx=50, pady=5)
 btn_Reportes.config(font="Helvetica", fg="#0E9F00")
 
-leer(nomArch) #Leer el backUp
+listaPersonas = leer(nomArch)  # Leer el backUp
 
 root.mainloop()

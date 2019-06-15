@@ -102,7 +102,7 @@ def crearEstudiante(carnet, carrera):
     return estudiante
 
 
-def crearProfesor(publicaciones, candidato=False):
+def crearProfesor(publicaciones, candidato=""):
     profesor = Profesor()
     profesor.setPublicaciones(publicaciones)
     profesor.setCandidato(candidato)
@@ -122,11 +122,10 @@ def crearPersona(persona, cedula, nombre, telefono):
     persona.setTelefono(telefono)
     return persona
 
-
 def funcionRegitrarMiembro(cedula, nombre, telefono, tipo,
                            carnet, publicaciones, extension, carrera, puesto):
     if tipo == 1:
-        persona = crearEstudiante(carnet, carrera)
+        persona = crearEstudiante(int(carnet), carrera)
     elif tipo == 2:
         persona = crearProfesor(publicaciones)
     else:
@@ -199,11 +198,6 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
                                      carnet, publicacion, extension, carrera, puesto)
         listaPersonasCarga += [persona]
     return listaPersonasCarga
-
-
-def funcionBotonRegistrarCandidatos():
-    return ""
-
 
 def funcionBotonGenerarVotacion():
     return ""
