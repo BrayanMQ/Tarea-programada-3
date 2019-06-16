@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4bd1dc5-bcf2-4954-a2b1-a6876c02f2ca" name="Default Changelist" comment="Versión: final 1.0">
+    <list default="true" id="f4bd1dc5-bcf2-4954-a2b1-a6876c02f2ca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/elecciones.py" beforeDir="false" afterPath="$PROJECT_DIR$/elecciones.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funciones.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcionesHTML.py" beforeDir="false" afterPath="$PROJECT_DIR$/funcionesHTML.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/funciones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="122" column="11" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
+            <state relative-caret-position="194">
+              <caret line="343" lean-forward="true" selection-start-line="343" selection-end-line="343" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -35,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/elecciones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="13" />
+            <state relative-caret-position="280">
+              <caret line="182" column="25" lean-forward="true" selection-start-line="182" selection-start-column="25" selection-end-line="182" selection-end-column="25" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -47,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="134" column="49" selection-start-line="134" selection-start-column="49" selection-end-line="134" selection-end-column="49" />
+            <state relative-caret-position="110">
+              <caret line="665" column="47" selection-start-line="665" selection-start-column="4" selection-end-line="665" selection-end-column="47" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -70,14 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>habilitar</find>
-      <find>false</find>
-      <find>candi</find>
-      <find>cargarDAto</find>
-      <find>informa</find>
-      <find>messa</find>
-      <find>listaCa</find>
-      <find>pantallaGenerarVotacion</find>
       <find>novotan</find>
       <find>votacion</find>
       <find>funcionCantidadCandidatos</find>
@@ -100,6 +91,14 @@
       <find>contar</find>
       <find>porcen</find>
       <find>print</find>
+      <find>crear</find>
+      <find>lbl_</find>
+      <find>registr</find>
+      <find>limpi</find>
+      <find>mensaje</find>
+      <find>mensajeError.</find>
+      <find>limpia</find>
+      <find>regist</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -110,8 +109,8 @@
       <list>
         <option value="$PROJECT_DIR$/clases.py" />
         <option value="$PROJECT_DIR$/funcionesHTML.py" />
-        <option value="$PROJECT_DIR$/elecciones.py" />
         <option value="$PROJECT_DIR$/funciones.py" />
+        <option value="$PROJECT_DIR$/elecciones.py" />
       </list>
     </option>
   </component>
@@ -252,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560622152775</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Versión: final 1.0&#10;&#10;Nota: &quot;Faltaría lo del año en cada HTML&quot; (pero yo no lo veo necesario)">
+      <created>1560724762301</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560724762301</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -268,12 +274,12 @@
     <frame x="-8" y="-8" width="1376" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.53963417" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1270553" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49850523" visible="true" weight="0.3236715" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49850523" visible="true" weight="0.25925925" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -353,7 +359,8 @@
     <MESSAGE value="La ventana &quot;Registrar Miembro&quot; ya tiene validaciones.&#10;Agregué métodos para verificar si la cédula ya existe." />
     <MESSAGE value="Validaciones mejoradas en &quot;Registrar miembro&quot;&#10;Programación de &quot;Generar votación&quot; lista&#10;Cree un método para saber la candidad de candidatos actuales.&#10;(Hice un pequeño cambio en la forma de guardar &quot;Cargar Datos&quot;)" />
     <MESSAGE value="Nota: Cambie un poco el método para obtener la cantidad de candidatos, ahora devuelve una tupla, por si algo da error fijarse en eso&#10;&#10;Cree el archivo para generar los HTML&#10;El reporte de Lista Candidatos ya está listo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nota: Cambie un poco el método para obtener la cantidad de candidatos, ahora devuelve una tupla, por si algo da error fijarse en eso&#10;&#10;Cree el archivo para generar los HTML&#10;El reporte de Lista Candidatos ya está listo" />
+    <MESSAGE value="Versión: final 1.0&#10;&#10;Nota: &quot;Faltaría lo del año en cada HTML&quot; (pero yo no lo veo necesario)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Versión: final 1.0&#10;&#10;Nota: &quot;Faltaría lo del año en cada HTML&quot; (pero yo no lo veo necesario)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/tkinter/commondialog.py">
@@ -407,30 +414,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/funciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="122" column="11" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
+        <state relative-caret-position="194">
+          <caret line="343" lean-forward="true" selection-start-line="343" selection-end-line="343" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elecciones.py">
+    <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="110">
+          <caret line="665" column="47" selection-start-line="665" selection-start-column="4" selection-end-line="665" selection-end-column="47" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
+    <entry file="file://$PROJECT_DIR$/elecciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="134" column="49" selection-start-line="134" selection-start-column="49" selection-end-line="134" selection-end-column="49" />
+        <state relative-caret-position="280">
+          <caret line="182" column="25" lean-forward="true" selection-start-line="182" selection-start-column="25" selection-end-line="182" selection-end-column="25" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

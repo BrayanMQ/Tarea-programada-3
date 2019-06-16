@@ -182,6 +182,7 @@ def pantallaRegistrarMiembro():
         txtBox_Publicaciones.delete(1.0, END)
         cb_Puesto.set("")
         txt_Extension.delete(0, len(txt_Extension.get()))
+        mensajeError.set("")
         ver()
 
     pantallaRegistrarMiembro = Toplevel(root)

@@ -336,8 +336,8 @@ def funcionHTMLListaVotantesCandidato(candidatoBuscar, listaPersonas, posicion):
 
 def funcionHTMLListaCantidadVotantesPorCandidato(listaPersonas):
     listaCandidatos = funcionCantidadCandidatos(listaPersonas)
-    listaCantidadVotos = [0, 0, 0, 0]
-    listaPorcentajes = contarVotos(listaPersonas)
+    listaCantidadVotos = contarVotos(listaPersonas)
+    listaPorcentajes = []
 
     for i in range(len(listaCandidatos)):
         listaPorcentajes.append((listaCantidadVotos[i] * 100) / (len(listaPersonas)))
