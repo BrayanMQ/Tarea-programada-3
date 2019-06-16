@@ -32,7 +32,6 @@ def leer(nomArchLeer):
         lista = pickle.load(f)
         f.close()
         showinfo("Back up", "Se cargó con éxito el back up.")
-
     except:
         print("Error")
 
@@ -77,7 +76,7 @@ def pantallaRegistrarMiembro():
             txt_Extension.config(state="normal")
 
     def validarDatos():
-        listaPersonas = leer(nomArch)
+        listaPersonas = leer(nomArch) #Revisar si esta línea es necesaria
         if rb_variable.get() == 1:
             validacionCarnet = validarCarnet(txt_Carnet.get())
             if validacionCarnet[0]:
@@ -334,6 +333,9 @@ def pantallaCargarDatos():
 def pantallaRegistrarCandidato():
     def funcionBotonRegistrarCandidatos():
 
+        if not listaPersonas:
+            lbl_Errores.config(text="La lista de personas se encuentra vacía.")
+
         cedula = txt_Cedula.get()
 
         if not validarCedula(cedula)[0]:
@@ -358,7 +360,7 @@ def pantallaRegistrarCandidato():
                                 contador = funcionCantidadCandidatos(listaPersonas)
 
                                 annoActual = str(time.strftime("%Y"))
-                                consecutivo = annoActual + "-" + str(contador[0])
+                                consecutivo = annoActual + "-" + str(len(contador))
                                 persona.setCandidato(consecutivo)
                                 grabar(nomArch, listaPersonas)
                         else:
@@ -440,6 +442,15 @@ def pantallaReportes():
     def llamarFuncionHTMLListaCandidatos():
         return funcionHTMLListaCandidatos(listaPersonas)
 
+    def llamarFuncionHTMLVotantesPorRol():
+        return funcionHTMLVotantesPorRol(listaPersonas)
+
+    def llamarFuncionHTMLEstudiantesPorCarrera():
+        return funcionHTMLEstudiantesPorCarrera(listaPersonas)
+
+    def llamarFuncionHTMLCargaAutomatica():
+        return funcionHTMLCargaAutomatica(listaPersonas)
+
     def llamarFuncionHTMLSeguidoresPorCandidato():
         return funcionHTMLSeguidoresPorCandidato(listaPersonas)
 
@@ -460,7 +471,7 @@ def pantallaReportes():
     btn_SeguidoresPorCandidato.grid(row=2, column=1, padx=50, pady=5)
     btn_SeguidoresPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_VotantesPorRol = Button(pantallaReportes, text="4. Votantes por rol.", width=20, height=1)
+    btn_VotantesPorRol = Button(pantallaReportes, command=llamarFuncionHTMLVotantesPorRol, text="4. Votantes por rol.", width=20, height=1)
     btn_VotantesPorRol.grid(row=3, column=1, padx=50, pady=5)
     btn_VotantesPorRol.config(font="Helvetica", fg="#0E9F00")
 
@@ -468,7 +479,7 @@ def pantallaReportes():
     btn_ListaNoVotantes.grid(row=4, column=1, padx=50, pady=5)
     btn_ListaNoVotantes.config(font="Helvetica", fg="#0E9F00")
 
-    btn_EstudiantesPorCarrera = Button(pantallaReportes, text="6. Estudiantes por carrera.", width=21, height=1)
+    btn_EstudiantesPorCarrera = Button(pantallaReportes, command=llamarFuncionHTMLEstudiantesPorCarrera, text="6. Estudiantes por carrera.", width=21, height=1)
     btn_EstudiantesPorCarrera.grid(row=5, column=1, padx=50, pady=5)
     btn_EstudiantesPorCarrera.config(font="Helvetica", fg="#0E9F00")
 
@@ -480,7 +491,7 @@ def pantallaReportes():
     btn_VotantesDeCandidato.grid(row=7, column=1, padx=50, pady=5)
     btn_VotantesDeCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_CargaAutomatica = Button(pantallaReportes, text="9. Carga automática.", width=20, height=1)
+    btn_CargaAutomatica = Button(pantallaReportes, command=llamarFuncionHTMLCargaAutomatica, text="9. Carga automática.", width=20, height=1)
     btn_CargaAutomatica.grid(row=8, column=1, padx=50, pady=5)
     btn_CargaAutomatica.config(font="Helvetica", fg="#0E9F00")
 

@@ -1,6 +1,6 @@
 from clases import *
 import xml.etree.cElementTree as ET
-
+import funciones
 
 def crearReporteListaCandidatos(listaCandidatos):
     html = ET.Element("html")  # Raiz, html
@@ -247,3 +247,229 @@ def crearReportePadronPorRol(listaPersonas):
 
     arbol = ET.ElementTree(html)
     arbol.write("Padrón por rol.html")  # Se escribe todo
+
+def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
+    html = ET.Element("html")  # Raiz, html
+    head = ET.SubElement(html, "head")
+
+    tituloPagina = ET.SubElement(head, "title")
+    tituloPagina.text = "Votantes por rol"
+
+    style = ET.SubElement(head, "style", type="text/css")  # Estilo del texto y la tabla
+    textoEstilo = "table td{padding: 5px 60px 5px 60px;}"  # "Bordes", espacios entre letra y celda
+    textoEstilo += "\ntable tbody{text-align: center;}"  # Centrar el texto en la tabla
+    textoEstilo += "\nheader{font-family: Arial; font-size: 90%; line-height: 40%}"  # Formato y estilo del encabezado
+    textoEstilo += "\ntable{font-family: Arial; font-size: 85%; border-collapse: collapse}"  # Unir las celdas, que solo quede una línea entre ellas
+    style.text = textoEstilo  # Se agregaTodo lo anterior dentro del nodo "style"
+
+    # Nodos
+    body = ET.SubElement(html, "body")
+    center = ET.SubElement(body, "center")
+    encabezado = ET.SubElement(center, "header")
+
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+
+    p1 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Votantes por rol"
+    p1.text = textoInfo
+
+    p2 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Periodo: 2019"
+    p2.text = textoInfo
+
+    table = ET.SubElement(center, "table", border="1px", style="text-align:center", )  # Tabla
+    cabeceraDeTabla = ET.SubElement(table, "thead")  # Nodo cabecera
+
+    fila1 = ET.SubElement(cabeceraDeTabla, "tr", bgcolor="Gainsboro")  # Fila1(cabecera)
+
+    columnas1 = ET.SubElement(fila1, "td")  # Celda1
+    columnas1.text = "Rol"
+
+    for candidato in listaCandidatos:
+        columnas1 = ET.SubElement(fila1, "td")
+        columnas1.text = candidato.getNombreCompleto()
+
+    cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
+
+    i = 0
+    listaRoles=["Estudiantes", "Profesores", "Administrativos"]
+    for rol in listaRoles:  # Cantidad de filas a crear
+
+        listaVotos = funciones.contarVotosPorRol(listaPersonas, funciones.obtenerRol(rol))
+        i += 1
+
+        if i % 2 != 0:  # Asigna un color
+            fila = ET.SubElement(cuerpoTabla, "tr")
+        else:  # Asigna otro color
+            fila = ET.SubElement(cuerpoTabla, "tr", bgcolor="Gainsboro")
+
+        columna = ET.SubElement(fila, "td")
+        columna.text = rol
+
+        j=0
+        for candidato in listaCandidatos:
+            columna = ET.SubElement(fila, "td")
+            columna.text = str(listaVotos[j])
+            j += 1
+
+    arbol = ET.ElementTree(html)
+    arbol.write("lista_VotantesPorRol.html")  # Se escribeTodo
+
+def crearReporteEstudiantesPorCarrera(listaEstudiantes):
+    html = ET.Element("html")  # Raiz, html
+    head = ET.SubElement(html, "head")
+
+    tituloPagina = ET.SubElement(head, "title")
+    tituloPagina.text = "Estudiantes por carrera"
+
+    style = ET.SubElement(head, "style", type="text/css")  # Estilo del texto y la tabla
+    textoEstilo = "table td{padding: 5px 60px 5px 60px;}"  # "Bordes", espacios entre letra y celda
+    textoEstilo += "\ntable tbody{text-align: center;}"  # Centrar el texto en la tabla
+    textoEstilo += "\nheader{font-family: Arial; font-size: 90%; line-height: 40%}"  # Formato y estilo del encabezado
+    textoEstilo += "\ntable{font-family: Arial; font-size: 85%; border-collapse: collapse}"  # Unir las celdas, que solo quede una línea entre ellas
+    style.text = textoEstilo  # Se agregaTodo lo anterior dentro del nodo "style"
+
+    # Nodos
+    body = ET.SubElement(html, "body")
+    center = ET.SubElement(body, "center")
+    encabezado = ET.SubElement(center, "header")
+
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+
+    p1 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Estudiantes por carrera"
+    p1.text = textoInfo
+
+    p2 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Periodo: 2019"
+    p2.text = textoInfo
+
+    listaCarreras = ["IC-Ingeniería en Computación",
+                     "ATI-Administración de la Información",
+                     "E-Electrónica",
+                     "AE-Administración de Empresas",
+                     "CA-Ingeniería en Computadoras"]
+
+    for carrera in listaCarreras:
+
+        p3 = ET.SubElement(center, "p")  # Texto para el encabezado
+        textoInfo = carrera
+        p3.text = textoInfo
+
+        table = ET.SubElement(center, "table", border="1px", style="text-align:center", )  # Tabla
+        cabeceraDeTabla = ET.SubElement(table, "thead")  # Nodo cabecera
+
+        fila1 = ET.SubElement(cabeceraDeTabla, "tr", bgcolor="Gainsboro")  # Fila1(cabecera)
+
+        columna = ET.SubElement(fila1, "td")  # Celda1
+        columna.text = "Carnet"
+
+        columna2 = ET.SubElement(fila1, "td")  # Celda2
+        columna2.text = "Nombre"
+
+        columna3 = ET.SubElement(fila1, "td")  # Celda3
+        columna3.text = "Voto emitido"
+
+        cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
+
+        ##
+        i = 0
+        for estudiante in listaEstudiantes:  # Cantidad de filas a crear
+            if estudiante.getCarrera() == carrera:
+                i += 1
+                if i % 2 != 0:  # Asigna un color
+                    fila = ET.SubElement(cuerpoTabla, "tr")
+                else:  # Asigna otro color
+                    fila = ET.SubElement(cuerpoTabla, "tr", bgcolor="Gainsboro")
+
+                # Se crean las celdas de cada fila a crear
+                columna = ET.SubElement(fila, "td")
+                columna.text = str(estudiante.getCarnet())
+
+                columna2 = ET.SubElement(fila, "td")
+                columna2.text = estudiante.getNombreCompleto()
+
+                columna3 = ET.SubElement(fila, "td")
+                columna3.text = str(estudiante.getVoto())
+
+    arbol = ET.ElementTree(html)
+    arbol.write("lista_EstudiantesPorCarrera.html")  # Se escribeTodo
+
+def crearReporteCargaAutomatica(listaPersonas):
+    html = ET.Element("html")  # Raiz, html
+    head = ET.SubElement(html, "head")
+
+    tituloPagina = ET.SubElement(head, "title")
+    tituloPagina.text = "Carga automática"
+
+    style = ET.SubElement(head, "style", type="text/css")  # Estilo del texto y la tabla
+    textoEstilo = "table td{padding: 5px 60px 5px 60px;}"  # "Bordes", espacios entre letra y celda
+    textoEstilo += "\ntable tbody{text-align: center;}"  # Centrar el texto en la tabla
+    textoEstilo += "\nheader{font-family: Arial; font-size: 90%; line-height: 40%}"  # Formato y estilo del encabezado
+    textoEstilo += "\ntable{font-family: Arial; font-size: 85%; border-collapse: collapse}"  # Unir las celdas, que solo quede una línea entre ellas
+    style.text = textoEstilo  # Se agregaTodo lo anterior dentro del nodo "style"
+
+    # Nodos
+    body = ET.SubElement(html, "body")
+    center = ET.SubElement(body, "center")
+    encabezado = ET.SubElement(center, "header")
+
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+    saltoDeLinea = ET.SubElement(encabezado, "br/")
+
+    p1 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Carga automática"
+    p1.text = textoInfo
+
+    p2 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
+    textoInfo = "Periodo: 2019"
+    p2.text = textoInfo
+
+    table = ET.SubElement(center, "table", border="1px", style="text-align:center", )  # Tabla
+    cabeceraDeTabla = ET.SubElement(table, "thead")  # Nodo cabecera
+
+    fila1 = ET.SubElement(cabeceraDeTabla, "tr", bgcolor="Gainsboro")  # Fila1(cabecera)
+
+    columna = ET.SubElement(fila1, "td")  # Celda1
+    columna.text = "#"
+
+    columna2 = ET.SubElement(fila1, "td")  # Celda2
+    columna2.text = "Cédula"
+
+    columna3 = ET.SubElement(fila1, "td")  # Celda3
+    columna3.text = "Nombre"
+
+    columna4 = ET.SubElement(fila1, "td")  # Celda4
+    columna4.text = "Rol"
+
+    cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
+
+    ##
+    i = 0
+    for persona in listaPersonas:  # Cantidad de filas a crear
+        i += 1
+        if i % 2 != 0:  # Asigna un color
+            fila = ET.SubElement(cuerpoTabla, "tr")
+        else:  # Asigna otro color
+            fila = ET.SubElement(cuerpoTabla, "tr", bgcolor="Gainsboro")
+
+        # Se crean las celdas de cada fila a crear
+        columna = ET.SubElement(fila, "td")
+        columna.text = str(i)
+
+        columna2 = ET.SubElement(fila, "td")
+        columna2.text = str(persona.getCedula())
+
+        columna3 = ET.SubElement(fila, "td")
+        columna3.text = str(persona.getNombreCompleto())
+
+        columna4 = ET.SubElement(fila, "td")
+        columna4.text = persona.getTipo()
+
+    arbol = ET.ElementTree(html)
+    arbol.write("lista_CargaAutomatica.html")  # Se escribeTodo

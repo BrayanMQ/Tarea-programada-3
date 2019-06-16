@@ -175,18 +175,18 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
         puesto = ""
 
         if tipoPersona == 1:
-            nombreCompleto = "Estudiante: Persona Número " + str(i)
+            nombreCompleto = "Nombre Número " + str(i)
             carreras = ["IC-Ingeniería en Computación", "ATI-Administración de la Información", "E-Electrónica",
                         "AE-Administración de Empresas", "CA-Ingeniería en Computadoras"]
             carrera = random.choice(carreras)
             carnet = random.randint(2019000000, 2019999999)
 
         elif tipoPersona == 2:
-            nombreCompleto = "Profesor: Persona Número " + str(i)
+            nombreCompleto = "Nombre Número " + str(i)
             publicacion = "Publicación Número " + str(i)
 
         else:
-            nombreCompleto = "Administrativo: Persona Número " + str(i)
+            nombreCompleto = "Nombre Número " + str(i)
             puestos = ["Secretaria", "Asistente administrativa", "Coordinador", "Director"]
             puesto = random.choice(puestos)
             extension = random.randint(1000, 9999)
@@ -198,30 +198,74 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
 
 
 def funcionCantidadCandidatos(listaPersonas):
-    cantidad = 1
-    listaPosiciones = []
+    listaCandidatos = []
     for persona in listaPersonas:
         if persona.getTipo() == "profesor":
             if not persona.getCandidato() == "":
-                cantidad += 1
-                listaPosiciones.append(persona)
-    print("")
-    return cantidad, listaPosiciones
+                listaCandidatos.append(persona)
+    return listaCandidatos
 
+def funcionObtenerEstudiantes(listaPersonas):
+    listaEstudiantes = []
+    for persona in listaPersonas:
+        if persona.getTipo() == "estudiante":
+            listaEstudiantes.append(persona)
+    return listaEstudiantes
 
 def funcionGenerarVotacion(anno, listaPersonas):
     cntCandidatos = funcionCantidadCandidatos(listaPersonas)
 
     for persona in listaPersonas:
-        voto = random.randint(0, cntCandidatos[0]-1)
+        voto = random.randint(1, len(cntCandidatos))
         persona.setVoto(voto)
     return listaPersonas
 
+def contarVotos(listaPersonas):
+    listaVotos = [0, 0, 0, 0]
+    for persona in listaPersonas:
+        if persona.getVoto() == 1:
+            listaVotos[0] += 1
+        elif persona.getVoto() == 2:
+            listaVotos[1] += 1
+        elif persona.getVoto() == 3:
+            listaVotos[2] += 1
+        elif persona.getVoto() == 4:
+            listaVotos[3] += 1
+    return listaVotos
+
+def contarVotosPorRol(listaPersonas, rol):
+    listaVotos = [0, 0, 0, 0]
+
+    for i in range(1, 5):  # i representa el candidato
+        for persona in listaPersonas:
+            if persona.getVoto() == i and persona.getTipo() == rol:
+                listaVotos[i - 1] += 1
+    return listaVotos
+
+def obtenerRol(rol):
+
+    if rol == "Estudiantes":
+        rol = "estudiante"
+
+    elif rol == "Profesores":
+        rol = "profesor"
+
+    elif rol == "Administrativos":
+        rol = "administrativo"
+
+    return rol
 
 def funcionHTMLListaCandidatos(listaPersonas):
     candidatos = funcionCantidadCandidatos(listaPersonas)
-    return crearReporteListaCandidatos(candidatos[1])
+    return crearReporteListaCandidatos(candidatos)
 
+def funcionHTMLVotantesPorRol(listaPersonas):
+    candidatos = funcionCantidadCandidatos(listaPersonas)
+    return crearReporteVotantesPorRol(candidatos, listaPersonas)
+
+def funcionHTMLEstudiantesPorCarrera(listaPersonas):
+    estudiantes = funcionObtenerEstudiantes(listaPersonas)
+    return crearReporteEstudiantesPorCarrera(estudiantes)
 
 def funcionHTMLSeguidoresPorCandidato(listaPersonas):
     listaCandidatos = funcionCantidadCandidatos(listaPersonas)[1]
@@ -230,3 +274,6 @@ def funcionHTMLSeguidoresPorCandidato(listaPersonas):
 
 def funcionBotonReportes():
     return ""
+def funcionHTMLCargaAutomatica(listaPersonas):
+    return crearReporteCargaAutomatica(listaPersonas)
+
