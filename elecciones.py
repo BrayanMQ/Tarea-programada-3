@@ -10,9 +10,11 @@ from tkinter.messagebox import showinfo, showerror
 listaPersonas = []
 nomArch = "personas_backUp"
 
+
 def actualizarLista():
     listaPersonas = leer(nomArch)
     return ""
+
 
 def grabar(nomArchGrabar, lista):
     # Función que graba un archivo con una lista de personas
@@ -21,7 +23,7 @@ def grabar(nomArchGrabar, lista):
         pickle.dump(lista, f)
         f.close()
     except:
-        print("Error")
+        print("")
 
 
 def leer(nomArchLeer):
@@ -31,10 +33,8 @@ def leer(nomArchLeer):
         f = open(nomArchLeer, "rb")
         lista = pickle.load(f)
         f.close()
-        showinfo("Back up", "Se cargó con éxito el back up.")
     except:
-        print("Error")
-
+        print("")
     return lista
 
 
@@ -55,6 +55,8 @@ def habilitarMenuPrincipal():
 
 
 def pantallaRegistrarMiembro():
+    deshabilitarMenuPrincipal()
+
     def ver():
         if rb_variable.get() == 1:
             txtBox_Publicaciones.config(state="disabled")
@@ -76,7 +78,7 @@ def pantallaRegistrarMiembro():
             txt_Extension.config(state="normal")
 
     def validarDatos():
-        listaPersonas = leer(nomArch) #Revisar si esta línea es necesaria
+        listaPersonas = leer(nomArch)  # Revisar si esta línea es necesaria
         if rb_variable.get() == 1:
             validacionCarnet = validarCarnet(txt_Carnet.get())
             if validacionCarnet[0]:
@@ -159,6 +161,8 @@ def pantallaRegistrarMiembro():
                                              puesto=cb_Puesto.get(), )
             listaPersonas.append(persona)
             grabar(nomArch, listaPersonas)  # Graba el archivo en memoria secundaria
+            pantallaRegistrarMiembro.destroy()
+            habilitarMenuPrincipal()
 
     def habilitarRegistrarMiembro():
         txt_Carnet.config(state="normal")
@@ -278,8 +282,16 @@ def pantallaRegistrarMiembro():
     # Este método es para habilitar un valor por defecto en los radio botones
     ver()
 
+    def cerrarVentana():
+        pantallaRegistrarMiembro.destroy()
+        habilitarMenuPrincipal()
+
+    pantallaRegistrarMiembro.protocol("WM_DELETE_WINDOW", cerrarVentana)
+
 
 def pantallaCargarDatos():
+    deshabilitarMenuPrincipal()
+
     def funcionBtnCargarDatosConfirmacion():
         mensaje = tk.messagebox.askquestion("Confirmación", "Se cargarán los datos aleatorios. ¿Desea continuar?",
                                             icon="warning")
@@ -329,13 +341,28 @@ def pantallaCargarDatos():
     lbl_Errores = Label(pantallaCargarDatos, textvariable=mensajeError, fg="red")
     lbl_Errores.place(x=125, y=125)
 
+    def cerrarVentana():
+        pantallaCargarDatos.destroy()
+        habilitarMenuPrincipal()
+
+    pantallaCargarDatos.protocol("WM_DELETE_WINDOW", cerrarVentana)
+
 
 def pantallaRegistrarCandidato():
+    deshabilitarMenuPrincipal()
+
     def funcionBotonRegistrarCandidatos():
+
+        contador = funcionCantidadCandidatos(listaPersonas)
+
+        if len(contador) == 4:
+            mensaje = "Ya se ha registrado la cantidad máxima\n de candidatos."
+            lbl_Errores.config(text=mensaje)
+            return ""
 
         if not listaPersonas:
             lbl_Errores.config(text="La lista de personas se encuentra vacía.")
-
+            return ""
         cedula = txt_Cedula.get()
 
         if not validarCedula(cedula)[0]:
@@ -350,17 +377,13 @@ def pantallaRegistrarCandidato():
                         encontrado = True
                         if persona.getCandidato() == "":
 
-                            respuesta = tk.messagebox.askquestion("Confirmación", "El docente con cédula " + cedula +
+                            respuesta = tk.messagebox.askquestion("Confirmación", "El profesor con cédula " + cedula +
                                                                   " se registrará como candidato. ¿Está de acuerdo?",
                                                                   icon="info")
 
                             if respuesta == "yes":
-
-                                #Meter este for en una función
-                                contador = funcionCantidadCandidatos(listaPersonas)
-
                                 annoActual = str(time.strftime("%Y"))
-                                consecutivo = annoActual + "-" + str(len(contador))
+                                consecutivo = annoActual + "-" + str(len(contador) + 1)
                                 persona.setCandidato(consecutivo)
                                 grabar(nomArch, listaPersonas)
                         else:
@@ -368,7 +391,7 @@ def pantallaRegistrarCandidato():
 
                     if not encontrado:
                         lbl_Errores.config(
-                            text="La cédula solicitada no corresponde a \nningún docente registrado.")
+                            text="La cédula solicitada no corresponde a \nningún profesor registrado.")
             else:
                 mensaje = validarLargoCedula(cedula)[1]
                 lbl_Errores.config(text=mensaje)
@@ -397,25 +420,50 @@ def pantallaRegistrarCandidato():
     btn_Limpiar.grid(row=2, column=1, padx=5, pady=5)
     btn_Limpiar.config(font="Helvetica")
 
-    lbl_Errores = Label(pantallaRegistrarCandidato, text="Error :v", fg="red")
-    lbl_Errores.place(x=125, y=100)
+    lbl_Errores = Label(pantallaRegistrarCandidato, text="", fg="red")
+    lbl_Errores.place(x=75, y=100)
+
+    def cerrarVentana():
+        pantallaRegistrarCandidato.destroy()
+        habilitarMenuPrincipal()
+
+    pantallaRegistrarCandidato.protocol("WM_DELETE_WINDOW", cerrarVentana)
 
 
 def pantallaGenerarVotacion():
+    deshabilitarMenuPrincipal()
 
     def funcionBtnElegir():
         if not cb_Anno.get() == "":
-            nuevaCarga = funcionGenerarVotacion(cb_Anno.get(), listaPersonas)
-            grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
-            actualizarLista()
+            cantidadCandidatos = funcionCantidadCandidatos(listaPersonas)
+            if len(cantidadCandidatos) == 0:
+                showerror("Error", "Aún no hay candidatos registrados.")
+                return ""
+
+            mensaje = tk.messagebox.askquestion("Confirmación",
+                                                "¿Desea elegir un nuevo rector?",
+                                                icon="info")
+
+            if mensaje == "yes":
+                nuevaCarga = funcionGenerarVotacion(listaPersonas)
+                grabar(nomArch, nuevaCarga)  # Graba el archivo en memoria secundaria
+                actualizarLista()
+                candidato = candidatoGanador(listaPersonas)
+                showinfo("Información", "El candidato ganador es: " + candidato[0] + "\nCon un total de: " +
+                         str(round(candidato[1], 2)) + " votos a favor.")
         else:
             tk.messagebox.showinfo("Confirmación", "Debe seleccionar un año.")
-
 
     pantallaGenerarVotacion = Toplevel(root)
     pantallaGenerarVotacion.title("Generar votación")
     pantallaGenerarVotacion.geometry("275x85")
     pantallaGenerarVotacion.resizable(False, False)
+
+    def cerrarVentana():
+        pantallaGenerarVotacion.destroy()
+        habilitarMenuPrincipal()
+
+    pantallaGenerarVotacion.protocol("WM_DELETE_WINDOW", cerrarVentana)
 
     Label(pantallaGenerarVotacion, text="Indicar año:").grid(row=1, column=0, padx=10, pady=5, sticky="E")
     cb_Anno = ttk.Combobox(pantallaGenerarVotacion, state="readonly",
@@ -429,18 +477,57 @@ def pantallaGenerarVotacion():
     btn_Elegir.grid(row=2, column=0, padx=5, pady=5)
     btn_Elegir.config(font="Helvetica")
 
-    btn_Regresar = Button(pantallaGenerarVotacion, command="", text="Regresar")
+    btn_Regresar = Button(pantallaGenerarVotacion, command=cerrarVentana, text="Regresar")
+    btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
+    btn_Regresar.config(font="Helvetica")
+
+
+def pantallaVotanteCandidato():
+    def funcionBtnMostrar():
+        if not cb_Candidatos.get() == "":
+            return funcionHTMLListaVotantesCandidato(cb_Candidatos.get(), listaPersonas, cb_Candidatos.current())
+        else:
+            tk.messagebox.showinfo("Confirmación", "Debe seleccionar un candidato.")
+
+    pantallaVotanteCandidato = Toplevel(root)
+    pantallaVotanteCandidato.title("Votantes de candidato")
+    pantallaVotanteCandidato.geometry("275x85")
+    pantallaVotanteCandidato.resizable(False, False)
+
+    listaCandidatos = funcionCantidadCandidatos(listaPersonas)
+    listaCB = []
+
+    for candidato in listaCandidatos:
+        listaCB.append(str(candidato.getCedula()) + " - " + candidato.getNombreCompleto())
+
+    Label(pantallaVotanteCandidato, text="Candidato").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    cb_Candidatos = ttk.Combobox(pantallaVotanteCandidato, state="readonly",
+                                 values=listaCB)
+    cb_Candidatos.grid(row=1, column=1, padx=10, pady=5, sticky="W")
+
+    btn_Mostrar = Button(pantallaVotanteCandidato, command=funcionBtnMostrar, text="Elegir")
+    btn_Mostrar.grid(row=2, column=0, padx=5, pady=5)
+    btn_Mostrar.config(font="Helvetica")
+
+    btn_Regresar = Button(pantallaVotanteCandidato, command="", text="Regresar")
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
     btn_Regresar.config(font="Helvetica")
 
 
 def pantallaReportes():
+    deshabilitarMenuPrincipal()
     pantallaReportes = Toplevel(root)
     pantallaReportes.title("Reportes")
     pantallaReportes.resizable(False, False)
 
     def llamarFuncionHTMLListaCandidatos():
         return funcionHTMLListaCandidatos(listaPersonas)
+
+    def llamarFuncionHTMLListaNoVotantes():
+        return funcionHTMLListaNoVotantes(listaPersonas)
+
+    def llamarFuncionHTMLListaCantidadVotantesPorCandidato():
+        return funcionHTMLListaCantidadVotantesPorCandidato(listaPersonas)
 
     def llamarFuncionHTMLVotantesPorRol():
         return funcionHTMLVotantesPorRol(listaPersonas)
@@ -457,43 +544,77 @@ def pantallaReportes():
     def llamarFuncionHTMLPadronPorRol():
         return crearReportePadronPorRol(listaPersonas)
 
-    btn_ListaCandidatos = Button(pantallaReportes, command=llamarFuncionHTMLListaCandidatos, text="1. Lista de candidatos.", width=20, height=1)
+    btn_ListaCandidatos = Button(pantallaReportes, command=llamarFuncionHTMLListaCandidatos,
+                                 text="1. Lista de candidatos.", width=20, height=1)
     btn_ListaCandidatos.grid(row=0, column=1, padx=50, pady=5)
     btn_ListaCandidatos.config(font="Helvetica", fg="#0E9F00")
 
-    btn_CantidadVotantesPorCandidato = Button(pantallaReportes, text="2. Cantidad de votantes por candidato.",
+    btn_CantidadVotantesPorCandidato = Button(pantallaReportes,
+                                              command=llamarFuncionHTMLListaCantidadVotantesPorCandidato,
+                                              text="2. Cantidad de votantes por candidato.",
                                               width=30, height=1)
     btn_CantidadVotantesPorCandidato.grid(row=1, column=1, padx=50, pady=5)
     btn_CantidadVotantesPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_SeguidoresPorCandidato = Button(pantallaReportes, command = llamarFuncionHTMLSeguidoresPorCandidato, text="3. Seguidores por candidato.", width=23,
+    btn_SeguidoresPorCandidato = Button(pantallaReportes, command=llamarFuncionHTMLSeguidoresPorCandidato,
+                                        text="3. Seguidores por candidato.", width=23,
                                         height=1)
     btn_SeguidoresPorCandidato.grid(row=2, column=1, padx=50, pady=5)
     btn_SeguidoresPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_VotantesPorRol = Button(pantallaReportes, command=llamarFuncionHTMLVotantesPorRol, text="4. Votantes por rol.", width=20, height=1)
+    btn_VotantesPorRol = Button(pantallaReportes, command=llamarFuncionHTMLVotantesPorRol, text="4. Votantes por rol.",
+                                width=20, height=1)
     btn_VotantesPorRol.grid(row=3, column=1, padx=50, pady=5)
     btn_VotantesPorRol.config(font="Helvetica", fg="#0E9F00")
 
-    btn_ListaNoVotantes = Button(pantallaReportes, text="5. Lista de no votantes.", width=20, height=1)
+    btn_ListaNoVotantes = Button(pantallaReportes, command=llamarFuncionHTMLListaNoVotantes,
+                                 text="5. Lista de no votantes.", width=20, height=1)
     btn_ListaNoVotantes.grid(row=4, column=1, padx=50, pady=5)
     btn_ListaNoVotantes.config(font="Helvetica", fg="#0E9F00")
 
-    btn_EstudiantesPorCarrera = Button(pantallaReportes, command=llamarFuncionHTMLEstudiantesPorCarrera, text="6. Estudiantes por carrera.", width=21, height=1)
+    btn_EstudiantesPorCarrera = Button(pantallaReportes, command=llamarFuncionHTMLEstudiantesPorCarrera,
+                                       text="6. Estudiantes por carrera.", width=21, height=1)
     btn_EstudiantesPorCarrera.grid(row=5, column=1, padx=50, pady=5)
     btn_EstudiantesPorCarrera.config(font="Helvetica", fg="#0E9F00")
 
-    btn_PadronPorRol = Button(pantallaReportes, command = llamarFuncionHTMLPadronPorRol, text="7. Padrón por rol.", width=20, height=1)
+    btn_PadronPorRol = Button(pantallaReportes, command=llamarFuncionHTMLPadronPorRol, text="7. Padrón por rol.",
+                              width=20, height=1)
     btn_PadronPorRol.grid(row=6, column=1, padx=50, pady=5)
     btn_PadronPorRol.config(font="Helvetica", fg="#0E9F00")
 
-    btn_VotantesDeCandidato = Button(pantallaReportes, text="8. Votantes de candidato.", width=21, height=1)
+    btn_VotantesDeCandidato = Button(pantallaReportes, command=pantallaVotanteCandidato,
+                                     text="8. Votantes de candidato.", width=21, height=1)
     btn_VotantesDeCandidato.grid(row=7, column=1, padx=50, pady=5)
     btn_VotantesDeCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_CargaAutomatica = Button(pantallaReportes, command=llamarFuncionHTMLCargaAutomatica, text="9. Carga automática.", width=20, height=1)
+    btn_CargaAutomatica = Button(pantallaReportes, command=llamarFuncionHTMLCargaAutomatica,
+                                 text="9. Carga automática.", width=20, height=1)
     btn_CargaAutomatica.grid(row=8, column=1, padx=50, pady=5)
     btn_CargaAutomatica.config(font="Helvetica", fg="#0E9F00")
+
+    # Funciones para posibles validaciones
+    candidatos = funcionCantidadCandidatos(listaPersonas)
+    if len(candidatos) == 0:
+        btn_ListaCandidatos.config(state="disabled")
+
+    if len(listaPersonas) == 0:
+        btn_EstudiantesPorCarrera.config(state="disabled")
+        btn_PadronPorRol.config(state="disabled")
+        btn_CargaAutomatica.config(state="disabled")
+
+    if not votacionGenerada(listaPersonas):
+        btn_CantidadVotantesPorCandidato.config(state="disabled")
+        btn_SeguidoresPorCandidato.config(state="disabled")
+        btn_VotantesPorRol.config(state="disabled")
+        btn_ListaNoVotantes.config(state="disabled")
+        btn_VotantesDeCandidato.config(state="disabled")
+        btn_EstudiantesPorCarrera.config(state="disabled")
+
+    def cerrarVentana():
+        pantallaReportes.destroy()
+        habilitarMenuPrincipal()
+
+    pantallaReportes.protocol("WM_DELETE_WINDOW", cerrarVentana)
 
 
 # Definición de la ventana principal

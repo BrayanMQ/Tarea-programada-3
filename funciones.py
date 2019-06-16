@@ -90,6 +90,29 @@ def validarCantidadCarga(cantidad):
     return True, "Debe introducir un número entre 1 y 100"
 
 
+def votacionGenerada(listaPersonas):
+    for persona in listaPersonas:
+        if persona.getVoto() != 0:
+            return True
+    return False
+
+
+def candidatoGanador(listaPersonas):
+    votos = contarVotos(listaPersonas)
+    votoMayor = 0
+    i = 0
+    for candidato in votos:
+        if candidato > votoMayor:
+            votoMayor = candidato
+            i += 1
+
+    listaCandidatos = funcionCantidadCandidatos(listaPersonas)
+    nombreGanador = listaCandidatos[i-1]
+    nombreCompleto = nombreGanador.getNombreCompleto()
+    porcentaje = (votos[i-1] * 100) / len(listaPersonas)
+
+    return nombreCompleto, porcentaje
+
 def crearEstudiante(carnet, carrera):
     estudiante = Estudiante()
     estudiante.setCarnet(carnet)
@@ -205,6 +228,7 @@ def funcionCantidadCandidatos(listaPersonas):
                 listaCandidatos.append(persona)
     return listaCandidatos
 
+
 def funcionObtenerEstudiantes(listaPersonas):
     listaEstudiantes = []
     for persona in listaPersonas:
@@ -212,13 +236,14 @@ def funcionObtenerEstudiantes(listaPersonas):
             listaEstudiantes.append(persona)
     return listaEstudiantes
 
-def funcionGenerarVotacion(anno, listaPersonas):
-    cntCandidatos = funcionCantidadCandidatos(listaPersonas)
 
+def funcionGenerarVotacion(listaPersonas):
+    cntCandidatos = funcionCantidadCandidatos(listaPersonas)
     for persona in listaPersonas:
-        voto = random.randint(1, len(cntCandidatos))
+        voto = random.randint(0, len(cntCandidatos))
         persona.setVoto(voto)
     return listaPersonas
+
 
 def contarVotos(listaPersonas):
     listaVotos = [0, 0, 0, 0]
@@ -233,6 +258,7 @@ def contarVotos(listaPersonas):
             listaVotos[3] += 1
     return listaVotos
 
+
 def contarVotosPorRol(listaPersonas, rol):
     listaVotos = [0, 0, 0, 0]
 
@@ -242,8 +268,8 @@ def contarVotosPorRol(listaPersonas, rol):
                 listaVotos[i - 1] += 1
     return listaVotos
 
-def obtenerRol(rol):
 
+def obtenerRol(rol):
     if rol == "Estudiantes":
         rol = "estudiante"
 
@@ -255,25 +281,69 @@ def obtenerRol(rol):
 
     return rol
 
+
 def funcionHTMLListaCandidatos(listaPersonas):
     candidatos = funcionCantidadCandidatos(listaPersonas)
     return crearReporteListaCandidatos(candidatos)
+
 
 def funcionHTMLVotantesPorRol(listaPersonas):
     candidatos = funcionCantidadCandidatos(listaPersonas)
     return crearReporteVotantesPorRol(candidatos, listaPersonas)
 
+
 def funcionHTMLEstudiantesPorCarrera(listaPersonas):
     estudiantes = funcionObtenerEstudiantes(listaPersonas)
     return crearReporteEstudiantesPorCarrera(estudiantes)
 
+
 def funcionHTMLSeguidoresPorCandidato(listaPersonas):
-    listaCandidatos = funcionCantidadCandidatos(listaPersonas)[1]
+    listaCandidatos = funcionCantidadCandidatos(listaPersonas)
     return crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos)
 
 
-def funcionBotonReportes():
-    return ""
+def obtenerNoVotantes(listaPersonas):
+    listaNoVotante = []
+    for persona in listaPersonas:
+        if persona.getVoto() == 0:
+            listaNoVotante.append(persona)
+    return listaNoVotante
+
+
+def funcionHTMLListaNoVotantes(listaPersonas):
+    noVotantes = obtenerNoVotantes(listaPersonas)
+    porcentaje = (len(noVotantes) * 100) / len(listaPersonas)
+    return crearReporteListaNoVotantes(noVotantes, porcentaje)
+
+
+def funcionHTMLListaVotantesCandidato(candidatoBuscar, listaPersonas, posicion):
+    listaVotantes = []
+    cntEstudiantes = 0
+    cntProfesores = 0
+    cntAdministrativos = 0
+    for persona in listaPersonas:
+        if persona.getVoto() == posicion + 1:
+            listaVotantes.append(persona)
+            if persona.getTipo() == "estudiante":
+                cntEstudiantes += 1
+            elif persona.getTipo() == "profesor":
+                cntProfesores += 1
+            else:
+                cntAdministrativos += 1
+    return crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudiantes, cntProfesores,
+                                              cntAdministrativos)
+
+
+def funcionHTMLListaCantidadVotantesPorCandidato(listaPersonas):
+    listaCandidatos = funcionCantidadCandidatos(listaPersonas)
+    listaCantidadVotos = [0, 0, 0, 0]
+    listaPorcentajes = contarVotos(listaPersonas)
+
+    for i in range(len(listaCandidatos)):
+        listaPorcentajes.append((listaCantidadVotos[i] * 100) / (len(listaPersonas)))
+
+    return crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVotos, listaPorcentajes)
+
+
 def funcionHTMLCargaAutomatica(listaPersonas):
     return crearReporteCargaAutomatica(listaPersonas)
-
