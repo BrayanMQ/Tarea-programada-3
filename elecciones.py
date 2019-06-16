@@ -389,9 +389,10 @@ def pantallaRegistrarCandidato():
                         else:
                             lbl_Errores.config(text="El candidato ya se encuentra registrado.")
 
-                    if not encontrado:
-                        lbl_Errores.config(
-                            text="La cédula solicitada no corresponde a \nningún profesor registrado.")
+                if not encontrado:
+                    lbl_Errores.config(
+                        text="La cédula solicitada no corresponde a \nningún profesor registrado.")
+
             else:
                 mensaje = validarLargoCedula(cedula)[1]
                 lbl_Errores.config(text=mensaje)
