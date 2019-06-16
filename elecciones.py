@@ -387,6 +387,7 @@ def pantallaRegistrarCandidato():
                                 consecutivo = annoActual + "-" + str(len(contador) + 1)
                                 persona.setCandidato(consecutivo)
                                 grabar(nomArch, listaPersonas)
+                                funcionBotonLimpiar()
                         else:
                             lbl_Errores.config(text="El candidato ya se encuentra registrado.")
 
