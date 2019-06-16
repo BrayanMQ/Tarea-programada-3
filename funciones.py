@@ -198,7 +198,7 @@ def funcionCargarDatos(cantidadACargar, listaPersonasCarga):
 
 
 def funcionCantidadCandidatos(listaPersonas):
-    cantidad = 0
+    cantidad = 1
     listaPosiciones = []
     for persona in listaPersonas:
         if persona.getTipo() == "profesor":
@@ -213,7 +213,7 @@ def funcionGenerarVotacion(anno, listaPersonas):
     cntCandidatos = funcionCantidadCandidatos(listaPersonas)
 
     for persona in listaPersonas:
-        voto = random.randint(1, cntCandidatos[0])
+        voto = random.randint(0, cntCandidatos[0]-1)
         persona.setVoto(voto)
     return listaPersonas
 
@@ -221,6 +221,11 @@ def funcionGenerarVotacion(anno, listaPersonas):
 def funcionHTMLListaCandidatos(listaPersonas):
     candidatos = funcionCantidadCandidatos(listaPersonas)
     return crearReporteListaCandidatos(candidatos[1])
+
+
+def funcionHTMLSeguidoresPorCandidato(listaPersonas):
+    listaCandidatos = funcionCantidadCandidatos(listaPersonas)[1]
+    return crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos)
 
 
 def funcionBotonReportes():

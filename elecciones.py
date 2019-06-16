@@ -76,8 +76,6 @@ def pantallaRegistrarMiembro():
             cb_Puesto.config(state="normal")
             txt_Extension.config(state="normal")
 
-    # def validar
-
     def validarDatos():
         listaPersonas = leer(nomArch)
         if rb_variable.get() == 1:
@@ -442,6 +440,12 @@ def pantallaReportes():
     def llamarFuncionHTMLListaCandidatos():
         return funcionHTMLListaCandidatos(listaPersonas)
 
+    def llamarFuncionHTMLSeguidoresPorCandidato():
+        return funcionHTMLSeguidoresPorCandidato(listaPersonas)
+
+    def llamarFuncionHTMLPadronPorRol():
+        return crearReportePadronPorRol(listaPersonas)
+
     btn_ListaCandidatos = Button(pantallaReportes, command=llamarFuncionHTMLListaCandidatos, text="1. Lista de candidatos.", width=20, height=1)
     btn_ListaCandidatos.grid(row=0, column=1, padx=50, pady=5)
     btn_ListaCandidatos.config(font="Helvetica", fg="#0E9F00")
@@ -451,7 +455,7 @@ def pantallaReportes():
     btn_CantidadVotantesPorCandidato.grid(row=1, column=1, padx=50, pady=5)
     btn_CantidadVotantesPorCandidato.config(font="Helvetica", fg="#0E9F00")
 
-    btn_SeguidoresPorCandidato = Button(pantallaReportes, text="3. Seguidores por candidato.", width=23,
+    btn_SeguidoresPorCandidato = Button(pantallaReportes, command = llamarFuncionHTMLSeguidoresPorCandidato, text="3. Seguidores por candidato.", width=23,
                                         height=1)
     btn_SeguidoresPorCandidato.grid(row=2, column=1, padx=50, pady=5)
     btn_SeguidoresPorCandidato.config(font="Helvetica", fg="#0E9F00")
@@ -468,7 +472,7 @@ def pantallaReportes():
     btn_EstudiantesPorCarrera.grid(row=5, column=1, padx=50, pady=5)
     btn_EstudiantesPorCarrera.config(font="Helvetica", fg="#0E9F00")
 
-    btn_PadronPorRol = Button(pantallaReportes, text="7. Padrón por rol.", width=20, height=1)
+    btn_PadronPorRol = Button(pantallaReportes, command = llamarFuncionHTMLPadronPorRol, text="7. Padrón por rol.", width=20, height=1)
     btn_PadronPorRol.grid(row=6, column=1, padx=50, pady=5)
     btn_PadronPorRol.config(font="Helvetica", fg="#0E9F00")
 
