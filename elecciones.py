@@ -212,29 +212,32 @@ def pantallaRegistrarMiembro():
     rb_variable = IntVar()
     rb_variable.set(1)
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1, command=ver, bg="#121212").grid(row=3,
-                                                                                                         column=0,
-                                                                                                         padx=10,
-                                                                                                         pady=5,
-                                                                                                         sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1, command=ver, bg="#121212",
+                activebackground="#121212").grid(row=3,
+                                                 column=0,
+                                                 padx=10,
+                                                 pady=5,
+                                                 sticky="W")
 
     Label(pantallaRegistrarMiembro, text="Estudiante", fg="white", bg="#121212").grid(row=3, column=0, padx=10, pady=5,
                                                                                       sticky="E")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2, command=ver, bg="#121212").grid(row=4,
-                                                                                                         column=0,
-                                                                                                         padx=10,
-                                                                                                         pady=5,
-                                                                                                         sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2, command=ver, bg="#121212",
+                activebackground="#121212").grid(row=4,
+                                                 column=0,
+                                                 padx=10,
+                                                 pady=5,
+                                                 sticky="W")
 
     Label(pantallaRegistrarMiembro, text="Profesor", fg="white", bg="#121212").grid(row=4, column=0, padx=10, pady=5,
                                                                                     sticky="E")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3, command=ver, bg="#121212").grid(row=5,
-                                                                                                         column=0,
-                                                                                                         padx=10,
-                                                                                                         pady=5,
-                                                                                                         sticky="W")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3, command=ver, bg="#121212",
+                activebackground="#121212").grid(row=5,
+                                                 column=0,
+                                                 padx=10,
+                                                 pady=5,
+                                                 sticky="W")
 
     Label(pantallaRegistrarMiembro, text="Administrativo", fg="white", bg="#121212").grid(row=5, column=0, padx=10,
                                                                                           pady=5, sticky="E")
@@ -495,7 +498,8 @@ def pantallaGenerarVotacion():
 
     pantallaGenerarVotacion.protocol("WM_DELETE_WINDOW", cerrarVentana)
 
-    Label(pantallaGenerarVotacion, text="Indicar año:", bg="#121212", fg="white").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaGenerarVotacion, text="Indicar año:", bg="#121212", fg="white").grid(row=1, column=0, padx=10, pady=5,
+                                                                                       sticky="E")
     cb_Anno = ttk.Combobox(pantallaGenerarVotacion, state="readonly",
                            values=["2019",
                                    "2023",
@@ -596,7 +600,7 @@ def pantallaReportes():
     btn_SeguidoresPorCandidato.config(font="Impact", fg="black")
 
     btn_VotantesPorRol = Button(pantallaReportes, command=llamarFuncionHTMLVotantesPorRol, text="4. Votantes por rol.",
-                                width=20, height=1, bd=4 )
+                                width=20, height=1, bd=4)
     btn_VotantesPorRol.grid(row=3, column=1, padx=50, pady=5)
     btn_VotantesPorRol.config(font="Impact", fg="black")
 
