@@ -15,7 +15,7 @@ def validacionCedulaExistente(cedula, listaPersonas):
     for pCedula in listaPersonas:
         pCedula = pCedula.getCedula()
         if pCedula == cedula:
-            return True, "La cédula ya se encuentra registrada."
+            return True, "La cédula ya se encuentra \nregistrada."
     return False, ""
 
 
@@ -24,13 +24,13 @@ def validarTelefono(telefono):
         telefono = int(telefono)
         return False, ""
     except:
-        return True, "El telefono solamente debe contener dígitos."
+        return True, "El telefono solamente debe \ncontener dígitos."
 
 
 def validarLargoTelefono(telefono):
     if len(telefono) == 8:
         return False, ""
-    return True, "El telefono debe ser de 8 dígitos."
+    return True, "El telefono debe ser de \n8 dígitos."
 
 
 def validarExtension(extension):
@@ -38,13 +38,13 @@ def validarExtension(extension):
         extension = int(extension)
         return False, ""
     except:
-        return True, "La extension solamente debe contener dígitos."
+        return True, "La extension solamente \ndebe contener dígitos."
 
 
 def validarLargoExtension(extension):
     if len(extension) == 4:
         return False, ""
-    return True, "La extension debe ser de 4 dígitos."
+    return True, "La extension debe ser \nde 4 dígitos."
 
 
 def validarCarnet(carnet):
@@ -52,13 +52,13 @@ def validarCarnet(carnet):
         carnet = int(carnet)
         return False, ""
     except:
-        return True, "El carnet solamente debe contener dígitos."
+        return True, "El carnet solamente debe \ncontener dígitos."
 
 
 def validarLargoCarnet(carnet):
     if len(carnet) == 10:
         return False, ""
-    return True, "El carnet debe ser de 10 dígitos."
+    return True, "El carnet debe ser de \n10 dígitos."
 
 
 def validarCedula(cedula):
@@ -66,13 +66,13 @@ def validarCedula(cedula):
         cedula = int(cedula)
         return False, ""
     except:
-        return True, "La cédula solamente debe contener dígitos."
+        return True, "La cédula solamente debe \ncontener dígitos."
 
 
 def validarLargoCedula(cedula):
     if len(cedula) == 9:
         return False, ""
-    return True, "La cédula debe ser de 9 dígitos."
+    return True, "La cédula debe ser de \n9 dígitos."
 
 
 def validarTipoDatoCarga(cantidad):
@@ -80,14 +80,14 @@ def validarTipoDatoCarga(cantidad):
         cantidad = int(cantidad)
         return False, ""
     except:
-        return True, "Debe introducir un valor numérico"
+        return True, "Debe introducir un \nvalor numérico."
 
 
 def validarCantidadCarga(cantidad):
     cantidad = int(cantidad)
     if cantidad > 0 and cantidad <= 100:
         return False, ""
-    return True, "Debe introducir un número entre 1 y 100"
+    return True, "Debe introducir un número \nentre 1 y 100."
 
 
 def votacionGenerada(listaPersonas):

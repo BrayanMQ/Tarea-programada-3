@@ -63,7 +63,7 @@ def pantallaRegistrarMiembro():
             cb_Puesto.config(state="disabled")
             txt_Extension.config(state="disabled")
             txt_Carnet.config(state="normal")
-            cb_Carrera.config(state="normal")
+            cb_Carrera.config(state="readonly")
         elif rb_variable.get() == 2:
             txt_Carnet.config(state="disabled")
             cb_Carrera.config(state="disabled")
@@ -74,7 +74,7 @@ def pantallaRegistrarMiembro():
             txt_Carnet.config(state="disabled")
             cb_Carrera.config(state="disabled")
             txtBox_Publicaciones.config(state="disabled")
-            cb_Puesto.config(state="normal")
+            cb_Puesto.config(state="readonly")
             txt_Extension.config(state="normal")
 
     def validarDatos():
@@ -189,11 +189,16 @@ def pantallaRegistrarMiembro():
     pantallaRegistrarMiembro.title("Registrar miembro")
     pantallaRegistrarMiembro.geometry("400x600")
     pantallaRegistrarMiembro.resizable(False, False)
+    pantallaRegistrarMiembro.iconbitmap("imagenes/logo.ico")
+    pantallaRegistrarMiembro.config(bg="#121212")
 
     # Primera sección
-    Label(pantallaRegistrarMiembro, text="Cédula:").grid(row=0, column=0, padx=10, pady=5, sticky="E")
-    Label(pantallaRegistrarMiembro, text="Nombre completo:").grid(row=1, column=0, padx=10, pady=5, sticky="E")
-    Label(pantallaRegistrarMiembro, text="Teléfono:").grid(row=2, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Cédula:", fg="white", bg="#121212").grid(row=0, column=0, padx=10, pady=5,
+                                                                                   sticky="E")
+    Label(pantallaRegistrarMiembro, text="Nombre completo:", fg="white", bg="#121212").grid(row=1, column=0, padx=10,
+                                                                                            pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Teléfono:", fg="white", bg="#121212").grid(row=2, column=0, padx=10, pady=5,
+                                                                                     sticky="E")
 
     txt_Cedula = Entry(pantallaRegistrarMiembro)
     txt_Cedula.grid(row=0, column=1, padx=10, pady=5, sticky="W")
@@ -207,39 +212,53 @@ def pantallaRegistrarMiembro():
     rb_variable = IntVar()
     rb_variable.set(1)
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1, command=ver).grid(row=3, column=0, padx=10,
-                                                                                           pady=5,
-                                                                                           sticky="W")
-    Label(pantallaRegistrarMiembro, text="Estudiante").grid(row=3, column=0, padx=10, pady=5, sticky="E")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=1, command=ver, bg="#121212").grid(row=3,
+                                                                                                         column=0,
+                                                                                                         padx=10,
+                                                                                                         pady=5,
+                                                                                                         sticky="W")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2, command=ver).grid(row=4, column=0, padx=10,
-                                                                                           pady=5,
-                                                                                           sticky="W")
-    Label(pantallaRegistrarMiembro, text="Profesor").grid(row=4, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Estudiante", fg="white", bg="#121212").grid(row=3, column=0, padx=10, pady=5,
+                                                                                      sticky="E")
 
-    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3, command=ver).grid(row=5, column=0, padx=10,
-                                                                                           pady=5,
-                                                                                           sticky="W")
-    Label(pantallaRegistrarMiembro, text="Administrativo").grid(row=5, column=0, padx=10, pady=5, sticky="E")
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=2, command=ver, bg="#121212").grid(row=4,
+                                                                                                         column=0,
+                                                                                                         padx=10,
+                                                                                                         pady=5,
+                                                                                                         sticky="W")
+
+    Label(pantallaRegistrarMiembro, text="Profesor", fg="white", bg="#121212").grid(row=4, column=0, padx=10, pady=5,
+                                                                                    sticky="E")
+
+    Radiobutton(pantallaRegistrarMiembro, variable=rb_variable, value=3, command=ver, bg="#121212").grid(row=5,
+                                                                                                         column=0,
+                                                                                                         padx=10,
+                                                                                                         pady=5,
+                                                                                                         sticky="W")
+
+    Label(pantallaRegistrarMiembro, text="Administrativo", fg="white", bg="#121212").grid(row=5, column=0, padx=10,
+                                                                                          pady=5, sticky="E")
 
     # Segunda sección
-    Label(pantallaRegistrarMiembro, text="Carnet:").grid(row=7, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Carnet:", fg="white", bg="#121212").grid(row=7, column=0, padx=10, pady=5,
+                                                                                   sticky="E")
 
     txt_Carnet = Entry(pantallaRegistrarMiembro)
     txt_Carnet.grid(row=7, column=1, padx=10, pady=5, sticky="W")
 
-    Label(pantallaRegistrarMiembro, text="Carrera:").grid(row=8, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Carrera:", fg="white", bg="#121212").grid(row=8, column=0, padx=10, pady=5,
+                                                                                    sticky="E")
     cb_Carrera = ttk.Combobox(pantallaRegistrarMiembro, state="readonly",
                               values=["IC-Ingeniería en Computación",
                                       "ATI-Administración de la Información",
                                       "E-Electrónica",
                                       "AE-Administración de Empresas",
                                       "CA-Ingeniería en Computadoras"])
-    cb_Carrera.grid(row=8, column=1, padx=10, pady=5,
-                    sticky="W")
+    cb_Carrera.grid(row=8, column=1, padx=10, pady=5, sticky="W")
 
     # Tercera sección
-    Label(pantallaRegistrarMiembro, text="Publicaciones: ").grid(row=9, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Publicaciones: ", fg="white", bg="#121212").grid(row=9, column=0, padx=10,
+                                                                                           pady=5, sticky="E")
     txtBox_Publicaciones = Text(pantallaRegistrarMiembro, width=25, height=5)
     txtBox_Publicaciones.grid(row=9, column=1, padx=10, pady=5)
 
@@ -254,7 +273,8 @@ def pantallaRegistrarMiembro():
     txtBox_Publicaciones['xscrollcommand'] = scrollHorizontal.set
 
     # Cuarta sección
-    Label(pantallaRegistrarMiembro, text="Puesto:").grid(row=11, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Puesto:", fg="white", bg="#121212").grid(row=11, column=0, padx=10, pady=5,
+                                                                                   sticky="E")
     cb_Puesto = ttk.Combobox(pantallaRegistrarMiembro, state="readonly",
                              values=["Secretaria",
                                      "Asistente administrativa",
@@ -262,23 +282,24 @@ def pantallaRegistrarMiembro():
                                      "Director"])
     cb_Puesto.grid(row=11, column=1, padx=10, pady=5, sticky="W")
 
-    Label(pantallaRegistrarMiembro, text="Extensión:").grid(row=12, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarMiembro, text="Extensión:", fg="white", bg="#121212").grid(row=12, column=0, padx=10, pady=5,
+                                                                                      sticky="E")
     txt_Extension = Entry(pantallaRegistrarMiembro)
     txt_Extension.grid(row=12, column=1, padx=10, pady=5, sticky="W")
 
     mensajeError = StringVar()
     mensajeError.set("")
-    lbl_Errores = Label(pantallaRegistrarMiembro, textvariable=mensajeError, fg="red")
+    lbl_Errores = Label(pantallaRegistrarMiembro, textvariable=mensajeError, fg="red", bg="#121212")
     lbl_Errores.grid(row=13, column=1, padx=10, pady=5)
 
     # Quinta sección
     btn_RegistrarRM = Button(pantallaRegistrarMiembro, text="Registrar", command=validarDatos)
     btn_RegistrarRM.grid(row=14, column=0, padx=0, pady=0)
-    btn_RegistrarRM.config(font="Helvetica")
+    btn_RegistrarRM.config(font="Impact")
 
     btn_LimpiarRM = Button(pantallaRegistrarMiembro, text="Limpiar", command=funcionBtnLimpiarPantallaRM)
     btn_LimpiarRM.grid(row=14, column=1, padx=0, pady=0)
-    btn_LimpiarRM.config(font="Helvetica")
+    btn_LimpiarRM.config(font="Impact")
 
     # Este método es para habilitar un valor por defecto en los radio botones
     ver()
@@ -318,28 +339,31 @@ def pantallaCargarDatos():
         mensajeError.set("")
         return funcionBtnCargarDatosConfirmacion()
 
-    pantallaCargarDatos = Toplevel(root)
+    pantallaCargarDatos = Toplevel(root, bg="#121212")
     pantallaCargarDatos.title("Cargar datos")
     pantallaCargarDatos.geometry("350x170")
     pantallaCargarDatos.resizable(False, False)
+    pantallaCargarDatos.iconbitmap("imagenes/logo.ico")
 
-    Label(pantallaCargarDatos, text="Carga Automática Aleatoria").grid(row=0, column=0, padx=10, pady=5)
+    Label(pantallaCargarDatos, text="Carga Automática Aleatoria", bg="#121212", fg="white").grid(row=0, column=0,
+                                                                                                 padx=10, pady=5)
 
-    Label(pantallaCargarDatos, text="Cantidad a crear:").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaCargarDatos, text="Cantidad a crear:", bg="#121212", fg="white").grid(row=1, column=0, padx=10,
+                                                                                        pady=5, sticky="E")
     txt_Cantidad = Entry(pantallaCargarDatos)
     txt_Cantidad.grid(row=1, column=1, padx=10, pady=5, sticky="W")
 
     btn_Crear = Button(pantallaCargarDatos, text="Cargar", command=validarCarga)
     btn_Crear.grid(row=2, column=0, padx=5, pady=5)
-    btn_Crear.config(font="Helvetica")
+    btn_Crear.config(font="Impact")
 
     btn_Limpiar = Button(pantallaCargarDatos, text="Limpiar", command=funcionBtnLimpiarPantallaCargarDatos)
     btn_Limpiar.grid(row=2, column=1, padx=5, pady=5)
-    btn_Limpiar.config(font="Helvetica")
+    btn_Limpiar.config(font="Impact")
 
     mensajeError = StringVar()
     mensajeError.set("")
-    lbl_Errores = Label(pantallaCargarDatos, textvariable=mensajeError, fg="red")
+    lbl_Errores = Label(pantallaCargarDatos, textvariable=mensajeError, fg="red", bg="#121212")
     lbl_Errores.place(x=125, y=125)
 
     def cerrarVentana():
@@ -406,25 +430,27 @@ def pantallaRegistrarCandidato():
         txt_Cedula.delete(0, len(txt_Cedula.get()))
         lbl_Errores.config(text="")
 
-    pantallaRegistrarCandidato = Toplevel(root)
+    pantallaRegistrarCandidato = Toplevel(root, bg="#121212")
     pantallaRegistrarCandidato.title("Registrar candidato")
-    pantallaRegistrarCandidato.geometry("350x170")
+    pantallaRegistrarCandidato.geometry("300x130")
     pantallaRegistrarCandidato.resizable(False, False)
+    pantallaRegistrarCandidato.iconbitmap("imagenes/logo.ico")
 
-    Label(pantallaRegistrarCandidato, text="Cédula:").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaRegistrarCandidato, text="Cédula:", bg="#121212", fg="white").grid(row=1, column=0, padx=10, pady=5,
+                                                                                     sticky="E")
     txt_Cedula = Entry(pantallaRegistrarCandidato)
     txt_Cedula.grid(row=1, column=1, padx=10, pady=5, sticky="W")
 
     btn_Buscar = Button(pantallaRegistrarCandidato, command=funcionBotonRegistrarCandidatos, text="Buscar")
     btn_Buscar.grid(row=2, column=0, padx=5, pady=5)
-    btn_Buscar.config(font="Helvetica")
+    btn_Buscar.config(font="Impact")
 
     btn_Limpiar = Button(pantallaRegistrarCandidato, command=funcionBotonLimpiar, text="Limpiar")
     btn_Limpiar.grid(row=2, column=1, padx=5, pady=5)
-    btn_Limpiar.config(font="Helvetica")
+    btn_Limpiar.config(font="Impact")
 
-    lbl_Errores = Label(pantallaRegistrarCandidato, text="", fg="red")
-    lbl_Errores.place(x=75, y=100)
+    lbl_Errores = Label(pantallaRegistrarCandidato, text="", fg="red", bg="#121212")
+    lbl_Errores.place(x=75, y=85)
 
     def cerrarVentana():
         pantallaRegistrarCandidato.destroy()
@@ -453,14 +479,15 @@ def pantallaGenerarVotacion():
                 actualizarLista()
                 candidato = candidatoGanador(listaPersonas)
                 showinfo("Información", "El candidato ganador es: " + candidato[0] + "\nCon un total de: " +
-                         str(round(candidato[1], 2)) + " votos a favor.")
+                         str(round(candidato[1], 2)) + " % votos a favor.")
         else:
             tk.messagebox.showinfo("Confirmación", "Debe seleccionar un año.")
 
-    pantallaGenerarVotacion = Toplevel(root)
+    pantallaGenerarVotacion = Toplevel(root, bg="#121212")
     pantallaGenerarVotacion.title("Generar votación")
     pantallaGenerarVotacion.geometry("275x85")
     pantallaGenerarVotacion.resizable(False, False)
+    pantallaGenerarVotacion.iconbitmap("imagenes/logo.ico")
 
     def cerrarVentana():
         pantallaGenerarVotacion.destroy()
@@ -468,7 +495,7 @@ def pantallaGenerarVotacion():
 
     pantallaGenerarVotacion.protocol("WM_DELETE_WINDOW", cerrarVentana)
 
-    Label(pantallaGenerarVotacion, text="Indicar año:").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaGenerarVotacion, text="Indicar año:", bg="#121212", fg="white").grid(row=1, column=0, padx=10, pady=5, sticky="E")
     cb_Anno = ttk.Combobox(pantallaGenerarVotacion, state="readonly",
                            values=["2019",
                                    "2023",
@@ -478,11 +505,11 @@ def pantallaGenerarVotacion():
 
     btn_Elegir = Button(pantallaGenerarVotacion, command=funcionBtnElegir, text="Elegir")
     btn_Elegir.grid(row=2, column=0, padx=5, pady=5)
-    btn_Elegir.config(font="Helvetica")
+    btn_Elegir.config(font="Impact")
 
     btn_Regresar = Button(pantallaGenerarVotacion, command=cerrarVentana, text="Regresar")
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
-    btn_Regresar.config(font="Helvetica")
+    btn_Regresar.config(font="Impact")
 
 
 def pantallaVotanteCandidato():
@@ -496,6 +523,7 @@ def pantallaVotanteCandidato():
     pantallaVotanteCandidato.title("Votantes de candidato")
     pantallaVotanteCandidato.geometry("275x85")
     pantallaVotanteCandidato.resizable(False, False)
+    pantallaVotanteCandidato.iconbitmap("imagenes/logo.ico")
 
     listaCandidatos = funcionCantidadCandidatos(listaPersonas)
     listaCB = []
@@ -510,11 +538,11 @@ def pantallaVotanteCandidato():
 
     btn_Mostrar = Button(pantallaVotanteCandidato, command=funcionBtnMostrar, text="Elegir")
     btn_Mostrar.grid(row=2, column=0, padx=5, pady=5)
-    btn_Mostrar.config(font="Helvetica")
+    btn_Mostrar.config(font="Impact")
 
     btn_Regresar = Button(pantallaVotanteCandidato, command="", text="Regresar")
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
-    btn_Regresar.config(font="Helvetica")
+    btn_Regresar.config(font="Impact")
 
 
 def pantallaReportes():
@@ -522,6 +550,8 @@ def pantallaReportes():
     pantallaReportes = Toplevel(root)
     pantallaReportes.title("Reportes")
     pantallaReportes.resizable(False, False)
+    pantallaReportes.iconbitmap("imagenes/logo.ico")
+    pantallaReportes.config(bg="#121212")
 
     def llamarFuncionHTMLListaCandidatos():
         return funcionHTMLListaCandidatos(listaPersonas)
@@ -548,52 +578,52 @@ def pantallaReportes():
         return crearReportePadronPorRol(listaPersonas)
 
     btn_ListaCandidatos = Button(pantallaReportes, command=llamarFuncionHTMLListaCandidatos,
-                                 text="1. Lista de candidatos.", width=20, height=1)
+                                 text="1. Lista de candidatos.", width=20, height=1, bd=4)
     btn_ListaCandidatos.grid(row=0, column=1, padx=50, pady=5)
-    btn_ListaCandidatos.config(font="Helvetica", fg="#0E9F00")
+    btn_ListaCandidatos.config(font="Impact", fg="black")
 
     btn_CantidadVotantesPorCandidato = Button(pantallaReportes,
                                               command=llamarFuncionHTMLListaCantidadVotantesPorCandidato,
                                               text="2. Cantidad de votantes por candidato.",
-                                              width=30, height=1)
+                                              width=30, height=1, bd=4)
     btn_CantidadVotantesPorCandidato.grid(row=1, column=1, padx=50, pady=5)
-    btn_CantidadVotantesPorCandidato.config(font="Helvetica", fg="#0E9F00")
+    btn_CantidadVotantesPorCandidato.config(font="Impact", fg="black")
 
     btn_SeguidoresPorCandidato = Button(pantallaReportes, command=llamarFuncionHTMLSeguidoresPorCandidato,
                                         text="3. Seguidores por candidato.", width=23,
-                                        height=1)
+                                        height=1, bd=4)
     btn_SeguidoresPorCandidato.grid(row=2, column=1, padx=50, pady=5)
-    btn_SeguidoresPorCandidato.config(font="Helvetica", fg="#0E9F00")
+    btn_SeguidoresPorCandidato.config(font="Impact", fg="black")
 
     btn_VotantesPorRol = Button(pantallaReportes, command=llamarFuncionHTMLVotantesPorRol, text="4. Votantes por rol.",
-                                width=20, height=1)
+                                width=20, height=1, bd=4 )
     btn_VotantesPorRol.grid(row=3, column=1, padx=50, pady=5)
-    btn_VotantesPorRol.config(font="Helvetica", fg="#0E9F00")
+    btn_VotantesPorRol.config(font="Impact", fg="black")
 
     btn_ListaNoVotantes = Button(pantallaReportes, command=llamarFuncionHTMLListaNoVotantes,
-                                 text="5. Lista de no votantes.", width=20, height=1)
+                                 text="5. Lista de no votantes.", width=20, height=1, bd=4)
     btn_ListaNoVotantes.grid(row=4, column=1, padx=50, pady=5)
-    btn_ListaNoVotantes.config(font="Helvetica", fg="#0E9F00")
+    btn_ListaNoVotantes.config(font="Impact", fg="black")
 
     btn_EstudiantesPorCarrera = Button(pantallaReportes, command=llamarFuncionHTMLEstudiantesPorCarrera,
-                                       text="6. Estudiantes por carrera.", width=21, height=1)
+                                       text="6. Estudiantes por carrera.", width=21, height=1, bd=4)
     btn_EstudiantesPorCarrera.grid(row=5, column=1, padx=50, pady=5)
-    btn_EstudiantesPorCarrera.config(font="Helvetica", fg="#0E9F00")
+    btn_EstudiantesPorCarrera.config(font="Impact", fg="black")
 
     btn_PadronPorRol = Button(pantallaReportes, command=llamarFuncionHTMLPadronPorRol, text="7. Padrón por rol.",
-                              width=20, height=1)
+                              width=20, height=1, bd=4)
     btn_PadronPorRol.grid(row=6, column=1, padx=50, pady=5)
-    btn_PadronPorRol.config(font="Helvetica", fg="#0E9F00")
+    btn_PadronPorRol.config(font="Impact", fg="black")
 
     btn_VotantesDeCandidato = Button(pantallaReportes, command=pantallaVotanteCandidato,
-                                     text="8. Votantes de candidato.", width=21, height=1)
+                                     text="8. Votantes de candidato.", width=21, height=1, bd=4)
     btn_VotantesDeCandidato.grid(row=7, column=1, padx=50, pady=5)
-    btn_VotantesDeCandidato.config(font="Helvetica", fg="#0E9F00")
+    btn_VotantesDeCandidato.config(font="Impact", fg="black")
 
     btn_CargaAutomatica = Button(pantallaReportes, command=llamarFuncionHTMLCargaAutomatica,
-                                 text="9. Carga automática.", width=20, height=1)
+                                 text="9. Carga automática.", width=20, height=1, bd=4)
     btn_CargaAutomatica.grid(row=8, column=1, padx=50, pady=5)
-    btn_CargaAutomatica.config(font="Helvetica", fg="#0E9F00")
+    btn_CargaAutomatica.config(font="Impact", fg="black")
 
     # Funciones para posibles validaciones
     candidatos = funcionCantidadCandidatos(listaPersonas)
@@ -624,33 +654,35 @@ def pantallaReportes():
 root = Tk()
 root.title("Elecciones")
 root.resizable(False, False)
+root.iconbitmap("imagenes/logo.ico")
 
 # Definición del frame
-frame = Frame(root, bg="black")
+frame = Frame(root, bg="#121212")
 frame.pack()
 
 # Definición de los botones
 
-btn_RegistrarMiembro = Button(frame, text="Registrar miembro", command=pantallaRegistrarMiembro, width=20, height=1)
+btn_RegistrarMiembro = Button(frame, text="Registrar miembro", command=pantallaRegistrarMiembro, width=20, height=1,
+                              bd=4)
 btn_RegistrarMiembro.grid(row=0, column=1, padx=50, pady=5)
-btn_RegistrarMiembro.config(font="Helvetica", fg="#0E9F00")
+btn_RegistrarMiembro.config(font="Impact", fg="black", highlightbackground="white")
 
-btn_CargarDatos = Button(frame, text="Cargar datos", command=pantallaCargarDatos, width=20, height=1)
+btn_CargarDatos = Button(frame, text="Cargar datos", command=pantallaCargarDatos, width=20, height=1, bd=4)
 btn_CargarDatos.grid(row=1, column=1, padx=50, pady=5)
-btn_CargarDatos.config(font="Helvetica", fg="#0E9F00")
+btn_CargarDatos.config(font="Impact", fg="black")
 
 btn_RegistrarCandidatos = Button(frame, command=pantallaRegistrarCandidato, text="Registrar candidatos", width=20,
-                                 height=1)
+                                 height=1, bd=4)
 btn_RegistrarCandidatos.grid(row=2, column=1, padx=50, pady=5)
-btn_RegistrarCandidatos.config(font="Helvetica", fg="#0E9F00")
+btn_RegistrarCandidatos.config(font="Impact", fg="black")
 
-btn_GenerarVotacion = Button(frame, text="Generar votación", command=pantallaGenerarVotacion, width=20, height=1)
+btn_GenerarVotacion = Button(frame, text="Generar votación", command=pantallaGenerarVotacion, width=20, height=1, bd=4)
 btn_GenerarVotacion.grid(row=3, column=1, padx=50, pady=5)
-btn_GenerarVotacion.config(font="Helvetica", fg="#0E9F00")
+btn_GenerarVotacion.config(font="Impact", fg="black")
 
-btn_Reportes = Button(frame, text="Reportes", command=pantallaReportes, width=20, height=1)
+btn_Reportes = Button(frame, text="Reportes", command=pantallaReportes, width=20, height=1, bd=4)
 btn_Reportes.grid(row=4, column=1, padx=50, pady=5)
-btn_Reportes.config(font="Helvetica", fg="#0E9F00")
+btn_Reportes.config(font="Impact", fg="black")
 
 listaPersonas = leer(nomArch)  # Leer el backUp
 
