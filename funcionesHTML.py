@@ -543,7 +543,7 @@ def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
     cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
     p3 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
-    textoInfo = "Porcentaje de abstenimiento: " + str(round(porcentaje, 2))
+    textoInfo = "Porcentaje de abstencionismo: " + str(round(porcentaje, 2))
     p3.text = textoInfo
     ##
     i = 0
