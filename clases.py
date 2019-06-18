@@ -1,3 +1,8 @@
+# Realizado por: Brayan Steven Marín Quirós, Ronny Jiménez Bonilla y Debir Granados Solano
+# Fecha de creación: 16/06/2019 5:10pm
+# Última modificación: 16/05/2019 9:20pm
+# Versión: 3.7.2
+
 class Persona:
     """
     Clase Persona
