@@ -1,10 +1,13 @@
 import os
-
 from clases import *
 import xml.etree.cElementTree as ET
 import funciones
 
-
+"""
+Función: crearReporteListaCandidatos (genera el HTML del reporte lista de candidatos)
+Entradas: listaCandidatos (list)
+Salidas: vacía
+"""
 def crearReporteListaCandidatos(listaCandidatos):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -83,6 +86,11 @@ def crearReporteListaCandidatos(listaCandidatos):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteSeguidoresPorCandidato (genera el HTML del reporte seguidores por candidato)
+Entradas: listaPersonas (list), listaCandidatos (list)
+Salidas: vacía
+"""
 def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -166,6 +174,11 @@ def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReportePadronPorRol (genera el HTML del reporte padrón por rol)
+Entradas: listaPersonas (list)
+Salidas: vacía
+"""
 def crearReportePadronPorRol(listaPersonas):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -259,6 +272,11 @@ def crearReportePadronPorRol(listaPersonas):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteVotantesPorRol (genera el HTML del reporte votantes por rol)
+Entradas: listaCandidatos (list), listaPersonas (list)
+Salidas: vacía
+"""
 def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -331,6 +349,11 @@ def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteEstudiantesPorCarrera (genera el HTML del reporte estudiantes por carrera)
+Entradas: listaEstudiantes (list)
+Salidas: vacía
+"""
 def crearReporteEstudiantesPorCarrera(listaEstudiantes):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -416,6 +439,11 @@ def crearReporteEstudiantesPorCarrera(listaEstudiantes):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteCargaAutomatica (genera el HTML del reporte carga automática)
+Entradas: listaPersonas (list)
+Salidas: vacía
+"""
 def crearReporteCargaAutomatica(listaPersonas):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -494,6 +522,11 @@ def crearReporteCargaAutomatica(listaPersonas):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteListaNoVotantes (genera el HTML del reporte lista de no votantes)
+Entradas: listaNoVotantes (list), porcentaje (float)
+Salidas: vacía
+"""
 def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -570,6 +603,11 @@ def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteListaVotantesCandidato (genera el HTML del reporte votantes de candidato)
+Entradas: listaVotantes (list), candidatoBuscar (str), cntEstudiantes (int), cntProfesores (int), cntAdministrativos (int)
+Salidas: vacía
+"""
 def crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudiantes, cntProfesores,
                                        cntAdministrativos):
     html = ET.Element("html")  # Raiz, html
@@ -663,6 +701,11 @@ def crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudi
     abrirHTML(nombreHTML)
 
 
+"""
+Función: crearReporteListaCantidadVotantesCandidatos (genera el HTML del reporte cantidad de votantes por candidato)
+Entradas: listaCandidatos (list), listaCantidadVotos (list), listaPorcentajes (list)
+Salidas: vacía
+"""
 def crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVotos, listaPorcentajes):
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
@@ -736,11 +779,11 @@ def crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVo
     abrirHTML(nombreHTML)
 
 
+"""
+Función: abrirHTML (abre el archivo HTML de acuerdo al nombre proporcionado)
+Entradas: nombreHTML (str)
+Salidas: vacía
+"""
 def abrirHTML(nombreHTML):
-    """
-    Función: Muestra el html
-    Entradas: NA
-    Salidas: Retorna ""
-    """
     os.popen(nombreHTML)
     return ""
