@@ -78,42 +78,31 @@ def pantallaRegistrarMiembro():
             txt_Extension.config(state="normal")
 
     def validarDatos():
-        listaPersonas = leer(nomArch)  # Revisar si esta línea es necesaria
+        listaPersonas = leer(nomArch)
         if rb_variable.get() == 1:
             validacionCarnet = validarCarnet(txt_Carnet.get())
             if validacionCarnet[0]:
                 mensajeError.set(validacionCarnet[1])
                 return ""
 
-            validacionLenCarnet = validarLargoCarnet(txt_Carnet.get())
-            if validacionLenCarnet[0]:
-                mensajeError.set(validacionLenCarnet[1])
+            if cb_Carrera.get() == "":
+                mensajeError.set("Debe seleccionar una carrera.")
                 return ""
 
-        if rb_variable == 2:
-            if txtBox_Publicaciones == "":
+        if rb_variable.get() == 2:
+            if txtBox_Publicaciones.get(1.0, END) == "\n":
                 mensajeError.set("De ingresar como mínimo una publicación.")
                 return ""
 
-        if rb_variable == 3:
-            validacionLenExtension = validarLargoExtension(txt_Extension.get())
-            if validacionLenExtension[0]:
-                mensajeError.set(validacionLenExtension[1])
-                return ""
-
+        if rb_variable.get() == 3:
             validacionExtension = validarExtension(txt_Extension.get())
             if validacionExtension[0]:
                 mensajeError.set(validacionExtension[1])
                 return ""
 
-            if cb_Puesto == "":
+            if cb_Puesto.get() == "":
                 mensajeError.set("Debe seleccionar un puesto.")
                 return ""
-
-        validacionLenCedula = validarLargoCedula(txt_Cedula.get())
-        if validacionLenCedula[0]:
-            mensajeError.set(validacionLenCedula[1])
-            return ""
 
         validacionCedula = validarCedula(txt_Cedula.get())
         if validacionCedula[0]:
@@ -125,22 +114,15 @@ def pantallaRegistrarMiembro():
             mensajeError.set(validacionCedulaExist[1])
             return ""
 
-        validacionLenTelefono = validarLargoTelefono(txt_Telefono.get())
-        if validacionLenTelefono[0]:
-            mensajeError.set(validacionLenTelefono[1])
-            return ""
-
         validacionTelefono = validarTelefono(txt_Telefono.get())
         if validacionTelefono[0]:
             mensajeError.set(validacionTelefono[1])
             return ""
 
-        camposVacios = validarCamposVacios(txt_NombreCompleto.get(),
-                                           txt_Extension.get(),
-                                           carrera=cb_Carrera.get())
-        if camposVacios:
-            mensajeError.set("Debe ingresar toda la información requerida.")
+        if txt_NombreCompleto.get() == "":
+            mensajeError.set("Debe ingresar un nombre.")
             return ""
+
         mensajeError.set("")
         return funcionBtnRegistrarPantallaRM()
 
@@ -394,7 +376,7 @@ def pantallaRegistrarCandidato():
         cedula = txt_Cedula.get()
 
         if not validarCedula(cedula)[0]:
-            if not validarLargoCedula(cedula)[0]:
+            if not validarCedula(cedula)[0]:
                 encontrado = False
                 for persona in listaPersonas:
 
@@ -423,7 +405,7 @@ def pantallaRegistrarCandidato():
                         text="La cédula solicitada no corresponde a \nningún profesor registrado.")
 
             else:
-                mensaje = validarLargoCedula(cedula)[1]
+                mensaje = validarCedula(cedula)[1]
                 lbl_Errores.config(text=mensaje)
         else:
             mensaje = validarCedula(cedula)[1]
@@ -523,6 +505,10 @@ def pantallaVotanteCandidato():
         else:
             tk.messagebox.showinfo("Confirmación", "Debe seleccionar un candidato.")
 
+    def cerrarVentana():
+        pantallaVotanteCandidato.destroy()
+        habilitarMenuPrincipal()
+
     pantallaVotanteCandidato = Toplevel(root, bg="#121212")
     pantallaVotanteCandidato.title("Votantes de candidato")
     pantallaVotanteCandidato.geometry("275x85")
@@ -545,7 +531,7 @@ def pantallaVotanteCandidato():
     btn_Mostrar.grid(row=2, column=0, padx=5, pady=5)
     btn_Mostrar.config(font="Impact")
 
-    btn_Regresar = Button(pantallaVotanteCandidato, command="", text="Regresar")
+    btn_Regresar = Button(pantallaVotanteCandidato, command=cerrarVentana, text="Regresar")
     btn_Regresar.grid(row=2, column=1, padx=5, pady=5)
     btn_Regresar.config(font="Impact")
 

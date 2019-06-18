@@ -36,7 +36,7 @@ def crearReporteListaCandidatos(listaCandidatos):
     p1.text = textoInfo
 
     p2 = ET.SubElement(encabezado, "p")  # Texto para el encabezado
-    textoInfo = "Periodo: 2019"  ###### Periodo - cambiar
+    textoInfo = "Periodo: 2019"
     p2.text = textoInfo
 
     table = ET.SubElement(center, "table", border="1px", style="text-align:center", )  # Tabla
@@ -119,7 +119,7 @@ def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
     p.text = textoInfo
 
     p = ET.SubElement(encabezado, "p")  # Texto para el encabezado
-    textoInfo = "Periodo: 2019"  ###### Periodo - cambiar
+    textoInfo = "Periodo: 2019"
     p.text = textoInfo
 
     j = 1
@@ -207,7 +207,7 @@ def crearReportePadronPorRol(listaPersonas):
     p.text = textoInfo
 
     p = ET.SubElement(encabezado, "p")  # Texto para el encabezado
-    textoInfo = "Periodo: 2019"  ###### Periodo
+    textoInfo = "Periodo: 2019"
     p.text = textoInfo
 
     listaAtributos = [["Estudiante", "Carnet", "Nombre", "Carrera"], ["Profesor", "Cédula", "Nombre"],

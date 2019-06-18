@@ -1,18 +1,6 @@
 from funcionesHTML import *
 import random
-
-"""
-Función: validarCamposVacios (valida si los campos de información vienen vacíos)
-Entradas: nombre (str), tipo (int), carrera (str)
-Salidas: booleanas (True o False)
-"""
-def validarCamposVacios(nombre, tipo, carrera):
-    if nombre == "" == "":
-        return True
-    if tipo == 1:
-        if carrera == "":
-            return True
-    return False
+import re
 
 
 """
@@ -34,23 +22,13 @@ Entradas: telefono (str)
 Salidas: tupla (booleana en el primer campo, string en el segundo)
 """
 def validarTelefono(telefono):
-    try:
-        telefono = int(telefono)
-        return False, ""
-    except:
-        return True, "El telefono solamente debe \ncontener dígitos."
+    if re.match("(0){1}", telefono):
+        return True, "El primer dígito del teléfono \nno debe ser 0."
 
+    if not re.match("^\d{8}$", telefono):
+        return True, "El teléfono debe solamente debe \ncontener 8 dígitos."
 
-"""
-Función: validarLargoTelefono (valida si el teléfono es del tamaño requerido)
-Entradas: telefono (str)
-Salidas: tupla (booleana en el primer campo, string en el segundo)
-"""
-def validarLargoTelefono(telefono):
-    if len(telefono) == 8:
-        return False, ""
-    return True, "El telefono debe ser de \n8 dígitos."
-
+    return False, ""
 
 
 def validarExtension(extension):
@@ -59,22 +37,13 @@ def validarExtension(extension):
     Entradas: extension (str)
     Salidas: tupla (booleana en el primer campo, string en el segundo)
     """
-    try:
-        extension = int(extension)
-        return False, ""
-    except:
-        return True, "La extension solamente \ndebe contener dígitos."
+    if re.match("(0){1}", extension):
+        return True, "El primer dígito de la \nextensión no debe ser 0."
 
+    if not re.match("^\d{4}$", extension):
+        return True, "La extensión debe solamente debe \ncontener 4 dígitos."
 
-"""
-Función: validarLargoExtension (valida si la extensión es del tamaño requerido)
-Entradas: extension (str)
-Salidas: tupla (booleana en el primer campo, string en el segundo)
-"""
-def validarLargoExtension(extension):
-    if len(extension) == 4:
-        return False, ""
-    return True, "La extension debe ser \nde 4 dígitos."
+    return False, ""
 
 
 """
@@ -83,22 +52,13 @@ Entradas: carnet (str)
 Salidas: tupla (booleana en el primer campo, string en el segundo)
 """
 def validarCarnet(carnet):
-    try:
-        carnet = int(carnet)
-        return False, ""
-    except:
-        return True, "El carnet solamente debe \ncontener dígitos."
+    if re.match("(0){1}", carnet):
+        return True, "El primer dígito del carnet \nno debe ser 0."
 
+    if not re.match("^\d{10}$", carnet):
+        return True, "El carnet debe solamente debe \ncontener 10 dígitos."
 
-"""
-Función: validarLargoCarnet (valida si el carnet es del tamaño requerido)
-Entradas: carnet (str)
-Salidas: tupla (booleana en el primer campo, string en el segundo)
-"""
-def validarLargoCarnet(carnet):
-    if len(carnet) == 10:
-        return False, ""
-    return True, "El carnet debe ser de \n10 dígitos."
+    return False, ""
 
 
 """
@@ -107,22 +67,13 @@ Entradas: cedula (str)
 Salidas: tupla (booleana en el primer campo, string en el segundo)
 """
 def validarCedula(cedula):
-    try:
-        cedula = int(cedula)
-        return False, ""
-    except:
-        return True, "La cédula solamente debe \ncontener dígitos."
+    if not re.match("[1-7]{1}", cedula):
+        return True, "El primer dígito de la cédula \ndebe ser entre 1-7."
 
+    if not re.match("^\d{9}$", cedula):
+        return True, "La cédula debe contener 9 dígitos."
 
-"""
-Función: validarLargoCedula (valida si la cédula es del tamaño requerido)
-Entradas: cedula (str)
-Salidas: tupla (booleana en el primer campo, string en el segundo)
-"""
-def validarLargoCedula(cedula):
-    if len(cedula) == 9:
-        return False, ""
-    return True, "La cédula debe ser de \n9 dígitos."
+    return False, ""
 
 
 """
@@ -177,11 +128,12 @@ def candidatoGanador(listaPersonas):
             i += 1
 
     listaCandidatos = funcionCantidadCandidatos(listaPersonas)
-    nombreGanador = listaCandidatos[i-1]
+    nombreGanador = listaCandidatos[i - 1]
     nombreCompleto = nombreGanador.getNombreCompleto()
-    porcentaje = (votos[i-1] * 100) / len(listaPersonas)
+    porcentaje = (votos[i - 1] * 100) / len(listaPersonas)
 
     return nombreCompleto, porcentaje
+
 
 """
 Función: crearEstudiante (genera un objeto de la clase Estudiante)
