@@ -523,11 +523,12 @@ def pantallaVotanteCandidato():
         else:
             tk.messagebox.showinfo("Confirmación", "Debe seleccionar un candidato.")
 
-    pantallaVotanteCandidato = Toplevel(root)
+    pantallaVotanteCandidato = Toplevel(root, bg="#121212")
     pantallaVotanteCandidato.title("Votantes de candidato")
     pantallaVotanteCandidato.geometry("275x85")
     pantallaVotanteCandidato.resizable(False, False)
     pantallaVotanteCandidato.iconbitmap("imagenes/logo.ico")
+
 
     listaCandidatos = funcionCantidadCandidatos(listaPersonas)
     listaCB = []
@@ -535,7 +536,7 @@ def pantallaVotanteCandidato():
     for candidato in listaCandidatos:
         listaCB.append(str(candidato.getCedula()) + " - " + candidato.getNombreCompleto())
 
-    Label(pantallaVotanteCandidato, text="Candidato").grid(row=1, column=0, padx=10, pady=5, sticky="E")
+    Label(pantallaVotanteCandidato, text="Candidato", bg="#121212", fg="white").grid(row=1, column=0, padx=10, pady=5, sticky="E")
     cb_Candidatos = ttk.Combobox(pantallaVotanteCandidato, state="readonly",
                                  values=listaCB)
     cb_Candidatos.grid(row=1, column=1, padx=10, pady=5, sticky="W")

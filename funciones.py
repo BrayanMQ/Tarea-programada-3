@@ -52,12 +52,13 @@ def validarLargoTelefono(telefono):
     return True, "El telefono debe ser de \n8 dígitos."
 
 
-"""
-Función: validarExtension (valida si la extensión es del tipo de dato requerido)
-Entradas: extension (str)
-Salidas: tupla (booleana en el primer campo, string en el segundo)
-"""
+
 def validarExtension(extension):
+    """
+    Función: validarExtension (valida si la extensión es del tipo de dato requerido)
+    Entradas: extension (str)
+    Salidas: tupla (booleana en el primer campo, string en el segundo)
+    """
     try:
         extension = int(extension)
         return False, ""
