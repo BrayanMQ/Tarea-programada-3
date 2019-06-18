@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4bd1dc5-bcf2-4954-a2b1-a6876c02f2ca" name="Default Changelist" comment="Carpeta con imágenes">
+    <list default="true" id="f4bd1dc5-bcf2-4954-a2b1-a6876c02f2ca" name="Default Changelist" comment="Tres archivos documentados">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clases.py" beforeDir="false" afterPath="$PROJECT_DIR$/clases.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elecciones.py" beforeDir="false" afterPath="$PROJECT_DIR$/elecciones.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funciones.py" beforeDir="false" afterPath="$PROJECT_DIR$/funciones.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funcionesHTML.py" beforeDir="false" afterPath="$PROJECT_DIR$/funcionesHTML.py" afterDir="false" />
     </list>
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clases.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1989">
-              <caret line="117" column="30" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -27,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/funciones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="2941">
+              <caret line="173" selection-start-line="173" selection-end-line="173" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -36,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/elecciones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="238" column="56" selection-start-line="238" selection-start-column="56" selection-end-line="238" selection-end-column="56" />
+            <state relative-caret-position="5797">
+              <caret line="341" column="20" selection-start-line="341" selection-start-column="20" selection-end-line="341" selection-end-column="20" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -48,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="604" selection-start-line="604" selection-end-line="604" />
+            <state relative-caret-position="-35">
+              <caret line="758" column="96" selection-start-line="758" selection-start-column="96" selection-end-line="758" selection-end-column="96" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -71,7 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>error</find>
       <find>btn_registrarMiembro</find>
       <find>norma</find>
       <find>menupr</find>
@@ -101,6 +101,7 @@
       <find>mensajeErr</find>
       <find>1.</find>
       <find>Registrar</find>
+      <find>candidatos.current</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,10 +110,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/elecciones.py" />
         <option value="$PROJECT_DIR$/clases.py" />
         <option value="$PROJECT_DIR$/funciones.py" />
         <option value="$PROJECT_DIR$/funcionesHTML.py" />
+        <option value="$PROJECT_DIR$/elecciones.py" />
       </list>
     </option>
   </component>
@@ -289,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560809446073</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Tres archivos documentados">
+      <created>1560816153936</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560816153936</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -310,14 +318,14 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49850523" visible="true" weight="0.3445287" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49850523" weight="0.34369886" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39761648" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32850242" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49925262" weight="0.32733223" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49925262" weight="0.32569557" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32850242" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50149477" side_tool="true" weight="0.3236715" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50149477" side_tool="true" weight="0.32242227" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32850242" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -395,7 +403,8 @@
     <MESSAGE value="ABSTENCIONISMO" />
     <MESSAGE value="Interfaz nueva, además, se arreglaron los bugs de los combobox en registrar miembro&#10;&#10;Los mensajes de error ahora tienen un salto de línea para que los label no sean tan grandes a la hora de mostrarlos" />
     <MESSAGE value="Carpeta con imágenes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Carpeta con imágenes" />
+    <MESSAGE value="Tres archivos documentados" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tres archivos documentados" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/tkinter/commondialog.py" />
@@ -404,39 +413,39 @@
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/xml/etree/ElementTree.py" />
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/contextlib.py" />
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/tkinter/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/elecciones.py">
+    <entry file="file://$PROJECT_DIR$/clases.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="238" column="56" selection-start-line="238" selection-start-column="56" selection-end-line="238" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clases.py">
+    <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1989">
-          <caret line="117" column="30" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
+        <state relative-caret-position="-35">
+          <caret line="758" column="96" selection-start-line="758" selection-start-column="96" selection-end-line="758" selection-end-column="96" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/funciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="2941">
+          <caret line="173" selection-start-line="173" selection-end-line="173" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcionesHTML.py">
+    <entry file="file://$PROJECT_DIR$/elecciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="604" selection-start-line="604" selection-end-line="604" />
+        <state relative-caret-position="5797">
+          <caret line="341" column="20" selection-start-line="341" selection-start-column="20" selection-end-line="341" selection-end-column="20" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

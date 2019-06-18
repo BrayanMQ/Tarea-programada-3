@@ -3,12 +3,12 @@ from clases import *
 import xml.etree.cElementTree as ET
 import funciones
 
-"""
-Función: crearReporteListaCandidatos (genera el HTML del reporte lista de candidatos)
-Entradas: listaCandidatos (list)
-Salidas: vacía
-"""
 def crearReporteListaCandidatos(listaCandidatos):
+    """
+    Función: crearReporteListaCandidatos (genera el HTML del reporte lista de candidatos)
+    Entradas: listaCandidatos (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -58,16 +58,15 @@ def crearReporteListaCandidatos(listaCandidatos):
 
     cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
-    ##
     i = 0
-    for candidato in listaCandidatos:  # Cantidad de filas a crear
+    for candidato in listaCandidatos:  # Cantidad de filas a crear, de acuerdo a cada candidato
         i += 1
         if i % 2 != 0:  # Asigna un color
             fila = ET.SubElement(cuerpoTabla, "tr")
         else:  # Asigna otro color
             fila = ET.SubElement(cuerpoTabla, "tr", bgcolor="Gainsboro")
 
-        # Se crean las celdas de cada fila a crear
+        # Se crean las celdas de cada fila
         columna = ET.SubElement(fila, "td")
         columna.text = str(candidato.getCedula())
 
@@ -86,12 +85,12 @@ def crearReporteListaCandidatos(listaCandidatos):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteSeguidoresPorCandidato (genera el HTML del reporte seguidores por candidato)
-Entradas: listaPersonas (list), listaCandidatos (list)
-Salidas: vacía
-"""
 def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
+    """
+    Función: crearReporteSeguidoresPorCandidato (genera el HTML del reporte seguidores por candidato)
+    Entradas: listaPersonas (list), listaCandidatos (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -125,6 +124,7 @@ def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
     j = 1
     for candidato in listaCandidatos:
 
+        # Creación de tablas
         p1 = ET.SubElement(body, "p1")
         textoInfo = "Candidato: " + candidato.getNombreCompleto()
         p1.text = textoInfo
@@ -146,7 +146,7 @@ def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
         cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
         i = 1
-        for persona in listaPersonas:  # Cantidad de filas a crear
+        for persona in listaPersonas:  # Cantidad de filas a crear, según cantidad de personas
             if persona.getVoto() == j:
                 if i % 2 != 0:  # Asigna un color
                     fila = ET.SubElement(cuerpoTabla, "tr")
@@ -174,12 +174,12 @@ def crearReporteSeguidoresPorCandidato(listaPersonas, listaCandidatos):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReportePadronPorRol (genera el HTML del reporte padrón por rol)
-Entradas: listaPersonas (list)
-Salidas: vacía
-"""
 def crearReportePadronPorRol(listaPersonas):
+    """
+    Función: crearReportePadronPorRol (genera el HTML del reporte padrón por rol)
+    Entradas: listaPersonas (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -214,6 +214,7 @@ def crearReportePadronPorRol(listaPersonas):
                       ["Administrativo", "Cédula", "Nombre", "Puesto"]]
     for atributos in listaAtributos:
 
+        # Creación de tablas
         p1 = ET.SubElement(body, "p1")
         textoInfo = "Rol: " + atributos[0]
         p1.text = textoInfo
@@ -237,7 +238,7 @@ def crearReportePadronPorRol(listaPersonas):
 
         i = 1
         tipo = atributos[0].lower()
-        for persona in listaPersonas:  # Cantidad de filas a crear
+        for persona in listaPersonas:  # Cantidad de filas a crear, según cantidad de personas
             if persona.getTipo() == tipo:
                 if i % 2 != 0:  # Asigna un color
                     fila = ET.SubElement(cuerpoTabla, "tr")
@@ -272,12 +273,12 @@ def crearReportePadronPorRol(listaPersonas):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteVotantesPorRol (genera el HTML del reporte votantes por rol)
-Entradas: listaCandidatos (list), listaPersonas (list)
-Salidas: vacía
-"""
 def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
+    """
+    Función: crearReporteVotantesPorRol (genera el HTML del reporte votantes por rol)
+    Entradas: listaCandidatos (list), listaPersonas (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -337,6 +338,7 @@ def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
         columna = ET.SubElement(fila, "td")
         columna.text = rol
 
+        # Para cada candidato
         j = 0
         for candidato in listaCandidatos:
             columna = ET.SubElement(fila, "td")
@@ -349,12 +351,12 @@ def crearReporteVotantesPorRol(listaCandidatos, listaPersonas):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteEstudiantesPorCarrera (genera el HTML del reporte estudiantes por carrera)
-Entradas: listaEstudiantes (list)
-Salidas: vacía
-"""
 def crearReporteEstudiantesPorCarrera(listaEstudiantes):
+    """
+    Función: crearReporteEstudiantesPorCarrera (genera el HTML del reporte estudiantes por carrera)
+    Entradas: listaEstudiantes (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -393,6 +395,7 @@ def crearReporteEstudiantesPorCarrera(listaEstudiantes):
 
     for carrera in listaCarreras:
 
+        # Creación de tablas
         p3 = ET.SubElement(center, "p")  # Texto para el encabezado
         textoInfo = carrera
         p3.text = textoInfo
@@ -413,9 +416,8 @@ def crearReporteEstudiantesPorCarrera(listaEstudiantes):
 
         cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
-        ##
         i = 0
-        for estudiante in listaEstudiantes:  # Cantidad de filas a crear
+        for estudiante in listaEstudiantes:  # Cantidad de filas a crear, según cantidad de estudiantes
             if estudiante.getCarrera() == carrera:
                 i += 1
                 if i % 2 != 0:  # Asigna un color
@@ -439,12 +441,12 @@ def crearReporteEstudiantesPorCarrera(listaEstudiantes):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteCargaAutomatica (genera el HTML del reporte carga automática)
-Entradas: listaPersonas (list)
-Salidas: vacía
-"""
 def crearReporteCargaAutomatica(listaPersonas):
+    """
+    Función: crearReporteCargaAutomatica (genera el HTML del reporte carga automática)
+    Entradas: listaPersonas (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -494,9 +496,8 @@ def crearReporteCargaAutomatica(listaPersonas):
 
     cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
-    ##
     i = 0
-    for persona in listaPersonas:  # Cantidad de filas a crear
+    for persona in listaPersonas:  # Cantidad de filas a crear, según cantidad de personas
         i += 1
         if i % 2 != 0:  # Asigna un color
             fila = ET.SubElement(cuerpoTabla, "tr")
@@ -522,12 +523,12 @@ def crearReporteCargaAutomatica(listaPersonas):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteListaNoVotantes (genera el HTML del reporte lista de no votantes)
-Entradas: listaNoVotantes (list), porcentaje (float)
-Salidas: vacía
-"""
 def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
+    """
+    Función: crearReporteListaNoVotantes (genera el HTML del reporte lista de no votantes)
+    Entradas: listaNoVotantes (list), porcentaje (float)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -578,7 +579,7 @@ def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
     p3 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
     textoInfo = "Porcentaje de abstencionismo: " + str(round(porcentaje, 2))
     p3.text = textoInfo
-    ##
+
     i = 0
     for noVotante in listaNoVotantes:  # Cantidad de filas a crear
         i += 1
@@ -603,13 +604,13 @@ def crearReporteListaNoVotantes(listaNoVotantes, porcentaje):
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteListaVotantesCandidato (genera el HTML del reporte votantes de candidato)
-Entradas: listaVotantes (list), candidatoBuscar (str), cntEstudiantes (int), cntProfesores (int), cntAdministrativos (int)
-Salidas: vacía
-"""
 def crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudiantes, cntProfesores,
                                        cntAdministrativos):
+    """
+    Función: crearReporteListaVotantesCandidato (genera el HTML del reporte votantes de candidato)
+    Entradas: listaVotantes (list), candidatoBuscar (str), cntEstudiantes (int), cntProfesores (int), cntAdministrativos (int)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -661,24 +662,24 @@ def crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudi
 
     cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
-    p4 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
+    p4 = ET.SubElement(piePagina, "p")  # Texto información
     textoInfo = "Total estudiantes: " + str(cntEstudiantes)
     p4.text = textoInfo
 
-    p5 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
+    p5 = ET.SubElement(piePagina, "p")  # Texto información
     textoInfo = "Total profesores: " + str(cntProfesores)
     p5.text = textoInfo
 
-    p6 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
+    p6 = ET.SubElement(piePagina, "p")  # Texto información
     textoInfo = "Total Administrativos: " + str(cntAdministrativos)
     p6.text = textoInfo
 
-    p7 = ET.SubElement(piePagina, "p")  # Texto para el encabezado
+    p7 = ET.SubElement(piePagina, "p")  # Texto información
     textoInfo = "Total General: " + str(len(listaVotantes))
     p7.text = textoInfo
-    ##
+
     i = 0
-    for votante in listaVotantes:  # Cantidad de filas a crear
+    for votante in listaVotantes:  # Cantidad de filas a crear, según cantidad de votantes
         i += 1
         if i % 2 != 0:  # Asigna un color
             fila = ET.SubElement(cuerpoTabla, "tr")
@@ -701,12 +702,12 @@ def crearReporteListaVotantesCandidato(listaVotantes, candidatoBuscar, cntEstudi
     abrirHTML(nombreHTML)
 
 
-"""
-Función: crearReporteListaCantidadVotantesCandidatos (genera el HTML del reporte cantidad de votantes por candidato)
-Entradas: listaCandidatos (list), listaCantidadVotos (list), listaPorcentajes (list)
-Salidas: vacía
-"""
 def crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVotos, listaPorcentajes):
+    """
+    Función: crearReporteListaCantidadVotantesCandidatos (genera el HTML del reporte cantidad de votantes por candidato)
+    Entradas: listaCandidatos (list), listaCantidadVotos (list), listaPorcentajes (list)
+    Salidas: vacía
+    """
     html = ET.Element("html")  # Raiz, html
     head = ET.SubElement(html, "head")
 
@@ -754,9 +755,8 @@ def crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVo
 
     cuerpoTabla = ET.SubElement(table, "tbody")  # Resto de la tabla
 
-    ##
     i = 0
-    for candidato in listaCandidatos:  # Cantidad de filas a crear
+    for candidato in listaCandidatos:  # Cantidad de filas a crear, según cantidad de candidatos
         i += 1
         if i % 2 != 0:  # Asigna un color
             fila = ET.SubElement(cuerpoTabla, "tr")
@@ -779,11 +779,11 @@ def crearReporteListaCantidadVotantesCandidatos(listaCandidatos, listaCantidadVo
     abrirHTML(nombreHTML)
 
 
-"""
-Función: abrirHTML (abre el archivo HTML de acuerdo al nombre proporcionado)
-Entradas: nombreHTML (str)
-Salidas: vacía
-"""
 def abrirHTML(nombreHTML):
+    """
+    Función: abrirHTML (abre el archivo HTML de acuerdo al nombre proporcionado)
+    Entradas: nombreHTML (str)
+    Salidas: vacía
+    """
     os.popen(nombreHTML)
     return ""

@@ -1,14 +1,13 @@
-"""
-Clase Persona
-
-Atributos: cedula (int)
-           nombreCompleto (str)
-           telefono (int)
-           voto (int)
-           tipo (str)
-"""
 class Persona:
+    """
+    Clase Persona
 
+    Atributos: cedula (int)
+               nombreCompleto (str)
+               telefono (int)
+               voto (int)
+               tipo (str)
+    """
     def __init__(self, tipo):
         self.cedula = 0
         self.nombreCompleto = ""
@@ -43,14 +42,14 @@ class Persona:
     def getTipo(self): # Método, obtiene el atributo tipo
         return self.tipo
 
-"""
-Clase Estudiante, con herencia de Persona
 
-Atributos: carnet (str)
-           carrera (str)
-"""
 class Estudiante(Persona):
+    """
+    Clase Estudiante, con herencia de Persona
 
+    Atributos: carnet (str)
+               carrera (str)
+    """
     def __init__(self):
         self.carnet = ""
         self.carrera = ""
@@ -68,13 +67,14 @@ class Estudiante(Persona):
     def getCarrera(self): # Método, obtiene el atributo carrera
         return self.carrera
 
-"""
-Clase Profesor, con herencia de Persona
 
-Atributos: publicaiones (str)
-           candidato (str)
-"""
 class Profesor(Persona):
+    """
+    Clase Profesor, con herencia de Persona
+
+    Atributos: publicaiones (str)
+               candidato (str)
+    """
 
     def __init__(self):
         self.publicaciones = ""
@@ -93,14 +93,14 @@ class Profesor(Persona):
     def getCandidato(self): # Método, obtiene el atributo candidato
         return self.candidato
 
-"""
-Clase Administrativo, con herencia de Persona
 
-Atributos: puesto (str)
-           extension (str)
-"""
 class Administrativo(Persona):
+    """
+    Clase Administrativo, con herencia de Persona
 
+    Atributos: puesto (str)
+               extension (str)
+    """
     def __init__(self):
         self.puesto = ""
         self.extension = ""
